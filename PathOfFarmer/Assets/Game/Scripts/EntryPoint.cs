@@ -8,6 +8,9 @@ public class EntryPoint: MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         _player = new Player(_playerView);
     }
 
