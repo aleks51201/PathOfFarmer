@@ -46,7 +46,6 @@ namespace Assets.Game.Scripts.Players
         public void Rotate()
         {
             HorizontalRotate();
-            VerticalRotate();
         }
 
         private void HorizontalRotate()
@@ -54,13 +53,6 @@ namespace Assets.Game.Scripts.Players
             var direction = new Vector2(_direction.y * -1, _direction.x);
 
             _player.PlayerView.transform.Rotate(Time.fixedDeltaTime * Speed * direction * Vector2.up);
-        }
-
-        private void VerticalRotate()
-        {
-            var direction = new Vector2(_direction.y * -1, _direction.x);
-
-            _player.PlayerView.Camera.transform.Rotate(Time.fixedDeltaTime * Speed * direction * Vector2.right);
         }
     }
 }

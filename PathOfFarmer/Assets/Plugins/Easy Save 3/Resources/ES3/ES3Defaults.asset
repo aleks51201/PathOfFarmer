@@ -32,6 +32,7 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - Cinemachine
     - DOTween.Modules
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
