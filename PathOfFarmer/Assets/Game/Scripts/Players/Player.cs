@@ -1,29 +1,39 @@
-using UnityEngine;
+using System;
 
 namespace Assets.Game.Scripts.Players
 {
-    public class Player
+    public class Player : IDisposable
     {
-        public Player()
-        {
+        private Mover _mover;
 
+        public Player(PlayerView playerView)
+        {
+            PlayerView = playerView;
+            _mover = new Mover(this);
         }
 
         public PlayerView PlayerView { get; set; }
-    }
 
-    public class Mover
-    {
-        private readonly Player _player;
-
-        public Mover(Player player)
+        public void Tick()
         {
-            _player = player;
+            _mover.Move();
         }
 
-        public void Move()
+        public void Start()
         {
-            _player.PlayerView.transform.position += new Vector3();
+            _mover.Start();
+        }
+
+        public void Delete()
+        {
+
+        }
+
+        public void Dispose()
+        {
+            _mover.Stop();
+
+            UnityEngine.Object.Destroy(PlayerView);
         }
     }
 }
