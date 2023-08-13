@@ -17,6 +17,8 @@ namespace Assets.Game.Scripts.Builders
 
         public void Start()
         {
+            _customInput.Enable();
+
             _customInput.Player.Build.performed += OnPerformed;
         }
 

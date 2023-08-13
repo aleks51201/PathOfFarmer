@@ -16,6 +16,7 @@ namespace Assets.Game.Scripts.Builders
         {
             IsBuilding = true;
 
+            _buildObject.Spawn();
         }
 
         public void Stop()

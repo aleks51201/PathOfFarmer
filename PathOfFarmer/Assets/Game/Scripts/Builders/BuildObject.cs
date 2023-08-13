@@ -17,11 +17,13 @@ namespace Assets.Game.Scripts.Builders
         public BuildObfectView Prefab { get; }
         public BuildObfectView View { get; private set; }
 
-        public BuildObfectView Spawn(Vector3 position)
+        public BuildObfectView Spawn()
         {
-            View = Object.Instantiate(Prefab, position, Quaternion.identity, _parentTransform);
+            View = Object.Instantiate(Prefab, _parentTransform.position, Quaternion.identity, _parentTransform);
 
             Sub();
+
+            UpdateMaterial();
 
             return View;
         }
@@ -38,22 +40,36 @@ namespace Assets.Game.Scripts.Builders
             View.TriggerExit -= OnExit;
         }
 
-        private void OnExit(Collider collider)
-        {
-            _gameObjects.Add(collider.gameObject);
-        }
-
         private void OnEnter(Collider collider)
         {
+            if (CheckItIsPlane(collider)) return;
+
+            _gameObjects.Add(collider.gameObject);
+
+            Debug.Log($"OnEnter {_gameObjects.Count}");
+
+            UpdateMaterial();
+        }
+
+        private void OnExit(Collider collider)
+        {
+            if (CheckItIsPlane(collider)) return;
+
             _gameObjects.Remove(collider.gameObject);
+
+            Debug.Log($"OnExit {_gameObjects.Count}");
+
+            UpdateMaterial();
+        }
+
+       private bool CheckItIsPlane(Collider collider)
+        {
+            return collider.CompareTag("Plane");
         }
 
         private void UpdateMaterial()
         {
-            for (var i = 0; i < View.Renderer.materials.Length; i++)
-            {
-                View.Renderer.materials[i] = _gameObjects.Count == 0 ? View.Positive : View.Negative;
-            }
+            View.Renderer.material = _gameObjects.Count == 0 ? View.Positive : View.Negative;
         }
     }
 }
