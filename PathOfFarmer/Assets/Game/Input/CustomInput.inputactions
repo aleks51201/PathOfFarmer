@@ -1,5 +1,5 @@
 {
-    "name": "PathOfFarmerInputSystem",
+    "name": "CustomInput",
     "maps": [
         {
             "name": "Player",
@@ -27,6 +27,15 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "0e4a6c84-7c91-4874-b671-a42b78ed5480",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Build",
+                    "type": "Button",
+                    "id": "c2a4ad70-4b58-4088-b7b9-311e78f10492",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -251,6 +260,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79d39139-2f66-493d-a128-538f0c62010b",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Build",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

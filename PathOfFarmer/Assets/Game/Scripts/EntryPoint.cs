@@ -1,36 +1,40 @@
 using Assets.Game.Scripts.Players;
 using UnityEngine;
 
-public class EntryPoint: MonoBehaviour
+namespace Assets.Game.Scripts
 {
-    [SerializeField] private PlayerView _playerView;
-    private Player _player;
-
-    private void Awake()
+    public class EntryPoint : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        [SerializeField] private PlayerView _playerView;
+        [SerializeField] private UiMediator _uiMediator;
+        private Player _player;
 
-        _player = new Player(_playerView);
-    }
+        private void Awake()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
-    private void Start()
-    {
-        _player.Start();
-    }
+            _player = new Player(_playerView);
+        }
 
-    private void Update()
-    {
-        _player.Tick();
-    }
+        private void Start()
+        {
+            _uiMediator.Initialize();
+            _player.Start();
+        }
 
-    private void FixedUpdate()
-    {
-        
-    }
+        private void Update()
+        {
+        }
 
-    private void OnDestroy()
-    {
-        
+        private void FixedUpdate()
+        {
+            _player.Tick();
+        }
+
+        private void OnDestroy()
+        {
+
+        }
     }
 }
