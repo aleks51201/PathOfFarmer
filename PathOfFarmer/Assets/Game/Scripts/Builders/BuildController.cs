@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace Assets.Game.Scripts.Builders
@@ -20,13 +19,14 @@ namespace Assets.Game.Scripts.Builders
         {
             _customInput.Enable();
 
-            _customInput.Player.Build.performed += OnPerformed;
+            _customInput.Player.Build.performed += OnBuildClick;
         }
 
         public void Stop()
         {
-            _customInput.Player.Build.performed -= OnPerformed;
+            _customInput.Player.Build.performed -= OnBuildClick;
             _customInput.Player.Fire.performed -= OnFireClick;
+            _customInput.Player.Rotate.performed -= OnRotateClick;
         }
 
         public void Tick()
@@ -34,20 +34,27 @@ namespace Assets.Game.Scripts.Builders
             _builder.Tick();
         }
 
-        private void OnPerformed(CallbackContext context)
+        private void OnBuildClick(CallbackContext context)
         {
             _builder.Start();
 
-            _customInput.Player.Build.performed -= OnPerformed;
+            _customInput.Player.Build.performed -= OnBuildClick;
             _customInput.Player.Fire.performed += OnFireClick;
+            _customInput.Player.Rotate.performed += OnRotateClick;
+        }
+
+        private void OnRotateClick(CallbackContext context)
+        {
+            _builder.Rotate();
         }
 
         private void OnFireClick(CallbackContext context)
         {
             _builder.Build();
 
-            _customInput.Player.Build.performed += OnPerformed;
+            _customInput.Player.Build.performed += OnBuildClick;
             _customInput.Player.Fire.performed -= OnFireClick;
+            _customInput.Player.Rotate.performed -= OnRotateClick;
         }
     }
 }

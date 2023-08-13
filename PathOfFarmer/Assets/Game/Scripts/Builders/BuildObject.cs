@@ -50,6 +50,8 @@ namespace Assets.Game.Scripts.Builders
 
             Unsub();
 
+            ChangeLayer();
+
             ResetMaterial();
         }
 
@@ -89,6 +91,16 @@ namespace Assets.Game.Scripts.Builders
         private void ResetMaterial()
         {
             _materialChanger.Reset();
+        }
+
+        private void ChangeLayer()
+        {
+            var components = View.GetComponentsInChildren<Transform>();
+
+            foreach(var component in components)
+            {
+                component.gameObject.layer = 1 << 0;
+            }
         }
     }
 }
