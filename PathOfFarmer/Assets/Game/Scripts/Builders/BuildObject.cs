@@ -76,6 +76,7 @@ namespace Assets.Game.Scripts.Builders
         private void OnEnter(Collider collider)
         {
             _collisionHolder.Add(collider);
+            Debug.Log($"OnEnter");
         }
 
         private void OnExit(Collider collider)
@@ -99,7 +100,7 @@ namespace Assets.Game.Scripts.Builders
 
             foreach(var component in components)
             {
-                component.gameObject.layer = 1 << 0;
+                component.gameObject.layer = 0;
             }
         }
     }
