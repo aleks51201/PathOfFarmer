@@ -16,17 +16,17 @@ namespace Assets.Game.Scripts.Builders
         public Material Positive => _positive;
         public Material Negative => _negative;
 
-        public event Action<Collider> TriggerEntered = delegate { };
-        public event Action<Collider> TriggerExit = delegate { };
+        public event Action<Collider> TriggerEnteredEvent = delegate { };
+        public event Action<Collider> TriggerExitEvent = delegate { };
 
         private void OnTriggerEnter(Collider other)
         {
-            TriggerEntered.Invoke(other);
+            TriggerEnteredEvent.Invoke(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            TriggerExit.Invoke(other);
+            TriggerExitEvent.Invoke(other);
         }
     }
 }

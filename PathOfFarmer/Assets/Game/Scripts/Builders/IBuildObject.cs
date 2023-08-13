@@ -7,7 +7,7 @@ namespace Assets.Game.Scripts.Builders
     {
         GameObject GameObject { get; }
 
-        event Action<Collider> TriggerEntered;
-        event Action<Collider> TriggerExit;
+        event Action<Collider> TriggerEnteredEvent;
+        event Action<Collider> TriggerExitEvent;
     }
 }

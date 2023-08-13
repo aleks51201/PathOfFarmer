@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.Builders
 {
     public class BuildObject
     {
         private readonly Transform _parentTransform;
-        private List<GameObject> _gameObjects;
+        private readonly BuildObjectCollisionHolder _collisionHolder;
 
         public BuildObject(BuildObfectView buildObjectView, Transform parentTransform)
         {
             Prefab = buildObjectView ?? throw new System.ArgumentNullException(nameof(buildObjectView));
             _parentTransform = parentTransform ?? throw new System.ArgumentNullException(nameof(parentTransform));
+            _collisionHolder = new BuildObjectCollisionHolder();
         }
 
         public BuildObfectView Prefab { get; }
@@ -23,7 +26,7 @@ namespace Assets.Game.Scripts.Builders
         {
             View = Object.Instantiate(Prefab, _parentTransform.position, Quaternion.identity, _parentTransform);
 
-            _gameObjects = new();
+            _collisionHolder.Reset();
 
             _materialChanger = new MaterialChanger(View.Renderer);
 
@@ -36,7 +39,7 @@ namespace Assets.Game.Scripts.Builders
 
         public void Complete()
         {
-            if (_gameObjects.Count != 0)
+            if (_collisionHolder.CollisionCount != 0)
             {
                 Debug.Log("Construction is impossible");
 
@@ -52,42 +55,35 @@ namespace Assets.Game.Scripts.Builders
 
         private void Sub()
         {
-            View.TriggerEntered += OnEnter;
-            View.TriggerExit += OnExit;
+            View.TriggerEnteredEvent += OnEnter;
+            View.TriggerExitEvent += OnExit;
+            _collisionHolder.UpdatedEvent += OnCollisionsUpdated;
+        }
+
+        private void OnCollisionsUpdated()
+        {
+            UpdateMaterial();
         }
 
         private void Unsub()
         {
-            View.TriggerEntered -= OnEnter;
-            View.TriggerExit -= OnExit;
+            View.TriggerEnteredEvent -= OnEnter;
+            View.TriggerExitEvent -= OnExit;
         }
 
         private void OnEnter(Collider collider)
         {
-            if (CheckItIsPlane(collider)) return;
-
-            _gameObjects.Add(collider.gameObject);
-
-            UpdateMaterial();
+            _collisionHolder.Add(collider);
         }
 
         private void OnExit(Collider collider)
         {
-            if (CheckItIsPlane(collider)) return;
-
-            _gameObjects.Remove(collider.gameObject);
-
-            UpdateMaterial();
-        }
-
-        private bool CheckItIsPlane(Collider collider)
-        {
-            return collider.CompareTag("Plane");
+            _collisionHolder.Remove(collider);
         }
 
         private void UpdateMaterial()
         {
-            _materialChanger.Change(_gameObjects.Count == 0 ? View.Positive : View.Negative);
+            _materialChanger.Change(_collisionHolder.CollisionCount == 0 ? View.Positive : View.Negative);
         }
 
         private void ResetMaterial()
