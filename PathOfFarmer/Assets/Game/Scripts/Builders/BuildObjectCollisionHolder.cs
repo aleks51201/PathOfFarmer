@@ -8,7 +8,10 @@ namespace Assets.Game.Scripts.Builders
     {
         private List<GameObject> _gameObjects;
 
-        public BuildObjectCollisionHolder() { }
+        public BuildObjectCollisionHolder() 
+        {
+            _gameObjects = new();
+        }
 
         public int CollisionCount => _gameObjects.Count;
 
