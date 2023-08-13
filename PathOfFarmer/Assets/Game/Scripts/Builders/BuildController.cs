@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 namespace Assets.Game.Scripts.Builders
@@ -25,6 +26,7 @@ namespace Assets.Game.Scripts.Builders
         public void Stop()
         {
             _customInput.Player.Build.performed -= OnPerformed;
+            _customInput.Player.Fire.performed -= OnFireClick;
         }
 
         public void Tick()
@@ -35,6 +37,17 @@ namespace Assets.Game.Scripts.Builders
         private void OnPerformed(CallbackContext context)
         {
             _builder.Start();
+
+            _customInput.Player.Build.performed -= OnPerformed;
+            _customInput.Player.Fire.performed += OnFireClick;
+        }
+
+        private void OnFireClick(CallbackContext context)
+        {
+            _builder.Build();
+
+            _customInput.Player.Build.performed += OnPerformed;
+            _customInput.Player.Fire.performed -= OnFireClick;
         }
     }
 }

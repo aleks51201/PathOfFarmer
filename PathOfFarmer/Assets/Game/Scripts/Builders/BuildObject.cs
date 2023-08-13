@@ -6,7 +6,7 @@ namespace Assets.Game.Scripts.Builders
     public class BuildObject
     {
         private readonly Transform _parentTransform;
-        private List<GameObject> _gameObjects = new();
+        private List<GameObject> _gameObjects;
 
         public BuildObject(BuildObfectView buildObjectView, Transform parentTransform)
         {
@@ -17,15 +17,37 @@ namespace Assets.Game.Scripts.Builders
         public BuildObfectView Prefab { get; }
         public BuildObfectView View { get; private set; }
 
+        private MaterialChanger _materialChanger;
+
         public BuildObfectView Spawn()
         {
             View = Object.Instantiate(Prefab, _parentTransform.position, Quaternion.identity, _parentTransform);
+
+            _gameObjects = new();
+
+            _materialChanger = new MaterialChanger(View.Renderer);
 
             Sub();
 
             UpdateMaterial();
 
             return View;
+        }
+
+        public void Complete()
+        {
+            if (_gameObjects.Count != 0)
+            {
+                Debug.Log("Construction is impossible");
+
+                Object.Destroy(View.gameObject);
+
+                return;
+            }
+
+            Unsub();
+
+            ResetMaterial();
         }
 
         private void Sub()
@@ -46,8 +68,6 @@ namespace Assets.Game.Scripts.Builders
 
             _gameObjects.Add(collider.gameObject);
 
-            Debug.Log($"OnEnter {_gameObjects.Count}");
-
             UpdateMaterial();
         }
 
@@ -57,19 +77,22 @@ namespace Assets.Game.Scripts.Builders
 
             _gameObjects.Remove(collider.gameObject);
 
-            Debug.Log($"OnExit {_gameObjects.Count}");
-
             UpdateMaterial();
         }
 
-       private bool CheckItIsPlane(Collider collider)
+        private bool CheckItIsPlane(Collider collider)
         {
             return collider.CompareTag("Plane");
         }
 
         private void UpdateMaterial()
         {
-            View.Renderer.material = _gameObjects.Count == 0 ? View.Positive : View.Negative;
+            _materialChanger.Change(_gameObjects.Count == 0 ? View.Positive : View.Negative);
+        }
+
+        private void ResetMaterial()
+        {
+            _materialChanger.Reset();
         }
     }
 }

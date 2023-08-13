@@ -22,7 +22,6 @@ namespace Assets.Game.Scripts.Builders
         public void Stop()
         {
             IsBuilding = false;
-
         }
 
         public void Tick()
@@ -33,6 +32,13 @@ namespace Assets.Game.Scripts.Builders
             {
                 Move(point);
             }
+        }
+
+        public void Build()
+        {
+            Stop();
+
+            _buildObject.Complete();
         }
 
         private void Move(Vector3 position)
