@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Game.Scripts
 {
     public class UiMediator : MonoBehaviour
     {
         [SerializeField] private MonoBehaviour[] _monoBehaviours;
+
+        public event Action StartOpenGardenPanelEvent = delegate { };
 
         public void Initialize()
         {
@@ -21,6 +24,11 @@ namespace Assets.Game.Scripts
                     ui.Initialize(this); ;
                 }
             }
+        }
+
+        public void OpenGardenBedPanel()
+        {
+            StartOpenGardenPanelEvent.Invoke();
         }
     }
 }

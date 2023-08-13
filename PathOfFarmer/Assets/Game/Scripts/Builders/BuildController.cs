@@ -15,6 +15,8 @@ namespace Assets.Game.Scripts.Builders
             _customInput = new CustomInput();
         }
 
+        public bool IsBuildingStage => _builder.IsBuilding;
+
         public void Start()
         {
             _customInput.Enable();
