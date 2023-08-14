@@ -41,8 +41,6 @@ namespace Assets.Game.Scripts.Builders
         {
             if (_collisionHolder.CollisionCount != 0)
             {
-                Debug.Log("Construction is impossible");
-
                 Object.Destroy(View.gameObject);
 
                 return;
