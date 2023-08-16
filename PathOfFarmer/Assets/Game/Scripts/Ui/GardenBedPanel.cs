@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Game.Scripts
+namespace Assets.Game.Scripts.Ui
 {
     public class GardenBedPanel : MonoBehaviour, IUi
     {

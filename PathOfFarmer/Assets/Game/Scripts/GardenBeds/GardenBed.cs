@@ -1,18 +1,22 @@
 ﻿using Assets.Game.Scripts.Builders;
+using Assets.Game.Scripts.Plants;
+using Assets.Game.Scripts.Seasons;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.InputSystem.InputAction;
+using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.GardenBeds
 {
     public class GardenBed
     {
-        private readonly UiMediator _uiMediator;
+        private readonly SeasonController _seasonController;
+        private List<Plant> _plants = new();
 
-        public GardenBed(GardenBedView gardenBedView, UiMediator uiMediator)
+        public GardenBed(GardenBedView gardenBedView, SeasonController seasonController)
         {
             GardenBedView = gardenBedView ?? throw new ArgumentNullException(nameof(gardenBedView));
-            _uiMediator = uiMediator ?? throw new ArgumentNullException(nameof(uiMediator));
+            _seasonController = seasonController;
 
             gardenBedView.InteractedEvent += OnInteracted;
         }
@@ -21,7 +25,14 @@ namespace Assets.Game.Scripts.GardenBeds
 
         private void OnInteracted()
         {
-            _uiMediator.OpenGardenBedPanel();
+            if (_plants.Count > 0) return;
+
+            foreach(var place in GardenBedView.Points)
+            {
+                var plantView = Object.Instantiate(GardenBedView.Prefab, place.position, Quaternion.identity, GardenBedView.transform);
+
+                _plants.Add(new Plant(plantView, _seasonController));
+            }
         }
     }
 }

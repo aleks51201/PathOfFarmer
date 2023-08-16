@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Game.Scripts.Seasons;
+using System;
 using UnityEngine;
 
 namespace Assets.Game.Scripts
@@ -7,10 +8,14 @@ namespace Assets.Game.Scripts
     {
         [SerializeField] private MonoBehaviour[] _monoBehaviours;
 
+        public SeasonController SeasonController { get; private set; }
+
+
         public event Action StartOpenGardenPanelEvent = delegate { };
 
-        public void Initialize()
+        public void Initialize(SeasonController seasonController)
         {
+            SeasonController = seasonController;
 
             DependencyInjections();
         }
@@ -31,4 +36,5 @@ namespace Assets.Game.Scripts
             StartOpenGardenPanelEvent.Invoke();
         }
     }
+
 }
