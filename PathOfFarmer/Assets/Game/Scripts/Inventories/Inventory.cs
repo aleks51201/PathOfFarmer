@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Game.Scripts.Inventories
 {
     public class Inventory
     {
-        private List<Cell> _cells;
+        private List<Cell> _cells = new();
         private int _masSlots;
 
         public int MaxSlots
@@ -28,12 +29,12 @@ namespace Assets.Game.Scripts.Inventories
             MaxSlots += count;
         }
 
-
-
-    }
-
-    public class Cell
-    {
-
+        public void Spawn()
+        {
+            for(var i = 0; i < MaxSlots; i++)
+            {
+                _cells.Add(new Cell());
+            }
+        }
     }
 }
