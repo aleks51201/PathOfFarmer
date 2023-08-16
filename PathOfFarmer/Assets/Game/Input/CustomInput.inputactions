@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Action",
+                    "type": "Button",
+                    "id": "30fa837d-2dfb-420a-97eb-f1f8707a5a8b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Build",
                     "type": "Button",
                     "id": "c2a4ad70-4b58-4088-b7b9-311e78f10492",
@@ -45,6 +54,15 @@
                     "name": "Rotate",
                     "type": "Button",
                     "id": "1afe8f49-e619-4ae8-a3a3-8c5c6f75ce99",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Season",
+                    "type": "Button",
+                    "id": "616ced8e-c2d1-4adf-b0fe-ae46a56bc419",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -291,6 +309,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "926df29f-ac00-46f1-9416-97f613d6a2b8",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd2cce9b-cebc-4a6d-b023-59dd04216812",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Season",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

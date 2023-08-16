@@ -55,6 +55,15 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""30fa837d-2dfb-420a-97eb-f1f8707a5a8b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Build"",
                     ""type"": ""Button"",
                     ""id"": ""c2a4ad70-4b58-4088-b7b9-311e78f10492"",
@@ -67,6 +76,15 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""name"": ""Rotate"",
                     ""type"": ""Button"",
                     ""id"": ""1afe8f49-e619-4ae8-a3a3-8c5c6f75ce99"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Season"",
+                    ""type"": ""Button"",
+                    ""id"": ""616ced8e-c2d1-4adf-b0fe-ae46a56bc419"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -313,6 +331,28 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""926df29f-ac00-46f1-9416-97f613d6a2b8"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd2cce9b-cebc-4a6d-b023-59dd04216812"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Season"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -903,8 +943,10 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        m_Player_Season = m_Player.FindAction("Season", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -981,8 +1023,10 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_Build;
     private readonly InputAction m_Player_Rotate;
+    private readonly InputAction m_Player_Season;
     public struct PlayerActions
     {
         private @CustomInput m_Wrapper;
@@ -990,8 +1034,10 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
+        public InputAction @Season => m_Wrapper.m_Player_Season;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1010,12 +1056,18 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Action.started += instance.OnAction;
+            @Action.performed += instance.OnAction;
+            @Action.canceled += instance.OnAction;
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
+            @Season.started += instance.OnSeason;
+            @Season.performed += instance.OnSeason;
+            @Season.canceled += instance.OnSeason;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1029,12 +1081,18 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Action.started -= instance.OnAction;
+            @Action.performed -= instance.OnAction;
+            @Action.canceled -= instance.OnAction;
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
+            @Season.started -= instance.OnSeason;
+            @Season.performed -= instance.OnSeason;
+            @Season.canceled -= instance.OnSeason;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1220,8 +1278,10 @@ public partial class @CustomInput: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnSeason(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
