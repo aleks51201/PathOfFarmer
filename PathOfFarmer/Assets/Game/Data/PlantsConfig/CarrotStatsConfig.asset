@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d2b7819e16c0b439ee3c8eb3eb7d8f, type: 3}
   m_Name: CarrotStatsConfig
   m_EditorClassIdentifier: 
-  _seasons: 0
+  _seasons: 5
