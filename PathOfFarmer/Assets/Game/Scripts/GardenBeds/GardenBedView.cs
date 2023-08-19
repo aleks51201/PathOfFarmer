@@ -8,10 +8,10 @@ namespace Assets.Game.Scripts.GardenBeds
     public class GardenBedView : MonoBehaviour,IInteractable
     {
         [SerializeField] private Transform[] _points;
-        [SerializeField] private PlantView _prefab;
+        [SerializeField] private PlantStatsConfig _plantConfig;
 
         public Transform[] Points => _points;
-        public PlantView Prefab => _prefab; 
+        public PlantStatsConfig PlantConfig => _plantConfig; 
 
         public event Action InteractedEvent = delegate { };
 

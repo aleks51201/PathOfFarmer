@@ -17,4 +17,14 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 3b5f19d78eefc5e4f8b1f0887235f92e, type: 3}
   _weight: 10
   _value: 1
-  _seasons: 5
+  _plantStages:
+  - _prefabStage: {fileID: 919132149155446097, guid: 152e0cb7dfcf0ea46978594188ec6e00, type: 3}
+    _seasons: 1
+  - _prefabStage: {fileID: 919132149155446097, guid: 0a66c62fd40da0f4a8114982f22f73d3, type: 3}
+    _seasons: 1
+  - _prefabStage: {fileID: 919132149155446097, guid: 6878f656b5d11cd4180576e2803cb491, type: 3}
+    _seasons: 1
+  - _prefabStage: {fileID: 919132149155446097, guid: 25ca367fe7e705242904b8668d2d614b, type: 3}
+    _seasons: 1
+  - _prefabStage: {fileID: 919132149155446097, guid: f2bf9b64b55ef294888aa84d4b356382, type: 3}
+    _seasons: 1

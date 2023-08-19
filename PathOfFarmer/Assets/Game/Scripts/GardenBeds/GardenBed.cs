@@ -32,7 +32,7 @@ namespace Assets.Game.Scripts.GardenBeds
             }
             else if(_plant == null)
             {
-                _plant = new Plant(GardenBedView.Prefab, _seasonController);
+                _plant = new Plant(GardenBedView.PlantConfig, _seasonController);
                 _plant.Spawn(GardenBedView.Points, GardenBedView.transform);
             }
         }
