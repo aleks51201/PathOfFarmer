@@ -1,40 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
 namespace Assets.Game.Scripts.Inventories
 {
     public class Inventory
     {
         private List<Cell> _cells = new();
-        private int _masSlots;
 
-        public int MaxSlots
+        public event Action<Cell> CountSlotsUpdatedEvent = delegate { };
+
+        public void Create()
         {
-            get => _masSlots;
-            private set
+            for (var i = 0; i < 10; i++)
             {
-                _masSlots = value;
-
-                CountSlotsUpdatedEvent.Invoke(_masSlots);
+                AddCell();
             }
         }
 
-        public event Action<int> CountSlotsUpdatedEvent = delegate { };
-
-        public void AddSlots(int count)
+        private Cell AddCell()
         {
-            if (count < 0) throw new ArgumentOutOfRangeException($"Value = {count}. Value cannot be less zero");
+            var newCell = new Cell();
 
-            MaxSlots += count;
+            _cells.Add(newCell);
+
+            CountSlotsUpdatedEvent.Invoke(newCell);
+
+            return newCell;
         }
 
-        public void Spawn()
+        public void AddItem(IItem item)
         {
-            for(var i = 0; i < MaxSlots; i++)
+            var emptyCell = _cells.First(cell => cell.Count == 0);
+
+            if (emptyCell == null)
             {
-                _cells.Add(new Cell());
+                emptyCell = AddCell();
             }
+
+            emptyCell.Item = item;
+            emptyCell.Count = 1;
         }
     }
 }

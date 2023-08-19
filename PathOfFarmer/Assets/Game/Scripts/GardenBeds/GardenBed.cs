@@ -1,37 +1,40 @@
-﻿using Assets.Game.Scripts.Builders;
+﻿using Assets.Game.Scripts.Inventories;
 using Assets.Game.Scripts.Plants;
 using Assets.Game.Scripts.Seasons;
 using System;
-using System.Collections.Generic;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.GardenBeds
 {
     public class GardenBed
     {
         private readonly SeasonController _seasonController;
-        private List<Plant> _plants = new();
+        private readonly StoreHouse _storeHouse;
+        private Plant _plant;
 
-        public GardenBed(GardenBedView gardenBedView, SeasonController seasonController)
+        public GardenBed(GardenBedView gardenBedView, SeasonController seasonController, StoreHouse storeHouse)
         {
             GardenBedView = gardenBedView ?? throw new ArgumentNullException(nameof(gardenBedView));
             _seasonController = seasonController;
-
+            _storeHouse = storeHouse;
             gardenBedView.InteractedEvent += OnInteracted;
         }
 
         public GardenBedView GardenBedView { get; }
+        public Plant Plant => _plant;
 
         private void OnInteracted()
         {
-            if (_plants.Count > 0) return;
+            if (_plant == null) return;
 
-            foreach(var place in GardenBedView.Points)
+            if (_plant.GrowthCompleted)
             {
-                var plantView = Object.Instantiate(GardenBedView.Prefab, place.position, Quaternion.identity, GardenBedView.transform);
 
-                _plants.Add(new Plant(plantView, _seasonController));
+                _plant = null;
+            }
+            else
+            {
+                _plant = new Plant(GardenBedView.Prefab, _seasonController);
+                _plant.Spawn(GardenBedView.Points, GardenBedView.transform);
             }
         }
     }
