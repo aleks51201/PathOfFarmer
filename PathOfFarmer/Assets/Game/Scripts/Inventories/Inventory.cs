@@ -31,7 +31,14 @@ namespace Assets.Game.Scripts.Inventories
 
         public void AddItem(IItem item)
         {
-            var emptyCell = _cells.First(cell => cell.Count == 0);
+            Cell emptyCell = null;
+            foreach(var cell in _cells)
+            {
+                if(cell.Count == 0)
+                {
+                    emptyCell = cell;
+                }
+            }
 
             if (emptyCell == null)
             {

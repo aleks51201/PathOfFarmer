@@ -24,14 +24,13 @@ namespace Assets.Game.Scripts.GardenBeds
 
         private void OnInteracted()
         {
-            if (_plant == null) return;
-
-            if (_plant.GrowthCompleted)
+            if (_plant != null && _plant.GrowthCompleted)
             {
-
+                _storeHouse.AddItem(_plant);
+                _plant.Delete();
                 _plant = null;
             }
-            else
+            else if(_plant == null)
             {
                 _plant = new Plant(GardenBedView.Prefab, _seasonController);
                 _plant.Spawn(GardenBedView.Points, GardenBedView.transform);

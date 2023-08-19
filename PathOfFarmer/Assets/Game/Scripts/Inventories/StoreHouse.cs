@@ -1,9 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.VFX;
+﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.Inventories
@@ -53,7 +48,8 @@ namespace Assets.Game.Scripts.Inventories
 
         private void OnCountSlotsUpdated(Cell cell)
         {
-            var storeHouseCell = new StoreHouseCell(_storeHouse);
+            var storeHouseCell = new StoreHouseCell(_storeHouse, cell);
+            storeHouseCell.Spawn();
         }
     }
 
@@ -61,28 +57,42 @@ namespace Assets.Game.Scripts.Inventories
     {
         private readonly StoreHouseCellView _prefab;
         private readonly Transform _parentTransform;
+        private readonly Cell _cell;
         private StoreHouseCellView _cellView;
 
-        public StoreHouseCell(StoreHouse storeHouse)
+        public StoreHouseCell(StoreHouse storeHouse, Cell cell)
         {
             _prefab = storeHouse.StoreHouseView.StoreHouseCellView;
             _parentTransform = storeHouse.StoreHouseView.Container;
+            _cell = cell;
+
+            _cell.ItemCountUpdatedEvent += UpdateData;
+            _cell.ItemUpdatedEvent += UpdateData;
+        }
+
+        private void UpdateData(int value)
+        {
+            if (value == 0)
+            {
+                SetViewEmpty();
+            }
+
+            SetViewFull(_cell);
+        }
+
+        private void UpdateData(IItem item)
+        {
+            if (item == null)
+            {
+                SetViewEmpty();
+            }
+
+            SetViewFull(_cell);
         }
 
         public void Spawn()
         {
             _cellView = Object.Instantiate(_prefab, _parentTransform);
-        }
-
-        public void UpdateData(Cell cell)
-        {
-            if(cell == null)
-            {
-                SetViewEmpty();
-                return;
-            }
-
-            SetViewFull(cell);
         }
 
         private void SetViewFull(Cell cell)

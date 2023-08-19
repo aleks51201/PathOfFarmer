@@ -1,14 +1,15 @@
-﻿using Assets.Game.Scripts.Seasons;
+﻿using Assets.Game.Scripts.Inventories;
+using Assets.Game.Scripts.Seasons;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Game.Scripts.Plants
 {
-    public class Plant
+    public class Plant : IItem
     {
         private readonly PlantView _plantViewPreafab;
         private readonly SeasonController _seasonController;
-        private List<PlantView> _plantViews;
+        private List<PlantView> _plantViews = new();
         private int _currenStage;
 
         public Plant(PlantView plantViewPrefab, SeasonController seasonController)
@@ -23,6 +24,7 @@ namespace Assets.Game.Scripts.Plants
         public PlantStatsConfig Stats => _plantViewPreafab.PlantStatsConfig;
         public int CurrentStage => _currenStage;
         public bool GrowthCompleted => _currenStage == _plantViewPreafab.GrowthStages.Stages.Length - 1;
+        public BaseStoreHouseCellConfig Config => _plantViewPreafab.PlantStatsConfig;
 
         public void Spawn(Transform[] points, Transform parentTransform)
         {
@@ -30,6 +32,16 @@ namespace Assets.Game.Scripts.Plants
             {
                 _plantViews.Add(Object.Instantiate(_plantViewPreafab, point.position, Quaternion.identity, parentTransform));
             }
+        }
+
+        public void Delete()
+        {
+            foreach (PlantView plant in _plantViews)
+            {
+                Object.Destroy(plant.gameObject);
+            }
+
+            _plantViews.Clear();
         }
 
         private void OnSeasonUpdated(int value)
@@ -43,7 +55,11 @@ namespace Assets.Game.Scripts.Plants
 
         private void ActivateStage(int stage, bool isActive)
         {
-            _plantViewPreafab.GrowthStages.Stages[stage].SetActive(isActive);
+            Debug.Log($"ActivateStage {stage}, {isActive}");
+            foreach(var plantView in _plantViews)
+            {
+                plantView.GrowthStages.Stages[stage].SetActive(isActive);
+            }
         }
     }
 }

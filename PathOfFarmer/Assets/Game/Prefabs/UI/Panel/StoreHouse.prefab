@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 7807035926000980766}
+  _storeHouseCellView: {fileID: 6419416823391437567, guid: fe768310c37c19648a1464fed9f4d360, type: 3}
 --- !u!1 &658192441039484834
 GameObject:
   m_ObjectHideFlags: 0
