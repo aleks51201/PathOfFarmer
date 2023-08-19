@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d2b7819e16c0b439ee3c8eb3eb7d8f, type: 3}
   m_Name: CarrotStatsConfig
   m_EditorClassIdentifier: 
+  _name: "\u041C\u043E\u0440\u043A\u043E\u0432\u044C"
+  _description: "\u041E\u0440\u0430\u043D\u0436\u0435\u0432\u0430\u044F"
+  _icon: {fileID: 21300000, guid: 3b5f19d78eefc5e4f8b1f0887235f92e, type: 3}
+  _weight: 10
+  _value: 1
   _seasons: 5

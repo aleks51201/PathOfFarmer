@@ -8,6 +8,10 @@ namespace Assets.Game.Scripts.Inventories
     {
         private List<Cell> _cells = new();
 
+        public Inventory()
+        {
+        }
+
         public event Action<Cell> CountSlotsUpdatedEvent = delegate { };
 
         public void Create()
