@@ -93,7 +93,7 @@ namespace Assets.Game.Scripts.Plants
 
             for (var i = 0; i < _plantStatsConfig.PlantStages.Length; i++)
             {
-                var newStageGo = Object.Instantiate(_plantStatsConfig.PlantStages[i]._prefabStage, point.position, Quaternion.identity, parentTransform);
+                var newStageGo = Object.Instantiate(_plantStatsConfig.PlantStages[i]._prefabStage, point.position, _plantStatsConfig.PlantStages[i]._prefabStage.transform.rotation, parentTransform);
                 newStageGo.SetActive(false);
 
                 var stage = new GrowthStage(newStageGo, _plantStatsConfig.PlantStages[i]._seasons, _seasonController);
