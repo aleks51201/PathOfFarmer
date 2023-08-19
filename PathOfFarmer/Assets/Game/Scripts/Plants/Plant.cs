@@ -35,7 +35,7 @@ namespace Assets.Game.Scripts.Plants
                 go.transform.position = point.position;
                 go.AddComponent<PlantView>();
 
-                _growthStages.Add(new GrowthStages( SpawnStages(go.transform, point)));
+                _growthStages.Add(new GrowthStages(SpawnStages(go.transform, point)));
 
                 _plantViews.Add(go.GetComponent<PlantView>());
             }
@@ -51,21 +51,31 @@ namespace Assets.Game.Scripts.Plants
 
         private void OnStageCompleted()
         {
+            if (GrowthCompleted) return;
+
+            foreach (var item in _growthStages)
+            {
+                if (!item.HaveNext())
+                {
+                    GrowthCompleted = true;
+                    foreach (var itemJ in _currentStageGo)
+                    {
+                        itemJ.StageCompletedEvent -= OnStageCompleted;
+                    }
+                    return;
+                }
+            }
+
             foreach (var item in _currentStageGo)
             {
                 item.Deactivate();
                 item.StageCompletedEvent -= OnStageCompleted;
             }
 
+
             _currentStageGo.Clear();
             foreach (var item in _growthStages)
             {
-                if (!item.HaveNext())
-                {
-                    GrowthCompleted = true;
-                    continue;
-                }
-
                 _currentStageGo.Add(item.GetNext());
             }
 
