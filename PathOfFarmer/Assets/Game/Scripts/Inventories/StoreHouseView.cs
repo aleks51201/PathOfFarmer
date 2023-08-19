@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Assets.Game.Scripts.Inventories
 {
-    public class StoreHouseView : MonoBehaviour, IUi
+    public class StoreHouseView : MonoBehaviour
     {
-        public void Initialize(UiMediator uiMediator)
-        {
-        }
+        [SerializeField, FoldoutGroup("Component")] private Transform _container;
 
-
+        public Transform Container => _container; 
     }
 }

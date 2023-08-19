@@ -1,5 +1,6 @@
 using Assets.Game.Scripts.Builders;
 using Assets.Game.Scripts.GardenBeds;
+using Assets.Game.Scripts.Inventories;
 using Assets.Game.Scripts.Players;
 using Assets.Game.Scripts.Seasons;
 using UnityEngine;
@@ -13,11 +14,14 @@ namespace Assets.Game.Scripts
         [SerializeField] private BuildObfectView _buildObjectViewPrefab;
         [SerializeField] private Transform _spawnHolder;
         [SerializeField] private GardenBedView _gardenBedView;
+        [SerializeField] private StoreHouseView _storeHouseView;
+
         private SeasonController _seasonController;
         private Player _player;
         private GardenBed _gardenBed;
         private BuildController _buildController;
         private Interactor _interactor;
+        private StoreHouse _storeHouse;
 
         private void Awake()
         {
@@ -30,6 +34,7 @@ namespace Assets.Game.Scripts
             _gardenBed = new GardenBed(_gardenBedView, _seasonController);
             _buildController = new BuildController(_buildObjectViewPrefab, _spawnHolder);
             _interactor = new Interactor(_buildController);
+            _storeHouse = new StoreHouse(_storeHouseView);
         }
 
         private void Start()
