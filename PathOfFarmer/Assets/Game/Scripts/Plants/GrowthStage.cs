@@ -34,6 +34,7 @@ namespace Assets.Game.Scripts.Plants
             {
                 stage.SetActive(true);
             }
+            OnZeroSeason();
 
             _seasonController.UpdatedEvent += OnSeasonUpdated;
         }
@@ -52,6 +53,14 @@ namespace Assets.Game.Scripts.Plants
         {
             _currentStage++;
 
+            if (StageCompleted)
+            {
+                StageCompletedEvent.Invoke();
+            }
+        }
+
+        private void OnZeroSeason()
+        {
             if (StageCompleted)
             {
                 StageCompletedEvent.Invoke();

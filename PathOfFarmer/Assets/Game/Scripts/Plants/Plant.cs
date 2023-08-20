@@ -57,13 +57,13 @@ namespace Assets.Game.Scripts.Plants
                 return;
             }
 
-            _currentStageGo.Deactivate();
             _currentStageGo.StageCompletedEvent -= OnStageCompleted;
+            _currentStageGo.Deactivate();
 
             _currentStageGo = _growthStages.GetNext();
 
-            _currentStageGo.Acivate();
             _currentStageGo.StageCompletedEvent += OnStageCompleted;
+            _currentStageGo.Acivate();
         }
 
         private void SpawnStages(Transform[] points)

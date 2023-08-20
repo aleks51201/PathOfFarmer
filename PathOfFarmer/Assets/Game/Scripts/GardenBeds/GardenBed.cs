@@ -2,6 +2,7 @@
 using Assets.Game.Scripts.Plants;
 using Assets.Game.Scripts.Seasons;
 using System;
+using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.GardenBeds
 {
@@ -10,6 +11,7 @@ namespace Assets.Game.Scripts.GardenBeds
         private readonly SeasonController _seasonController;
         private readonly StoreHouse _storeHouse;
         private Plant _plant;
+        private PointsForPlantView _points;
 
         public GardenBed(GardenBedView gardenBedView, SeasonController seasonController, StoreHouse storeHouse)
         {
@@ -17,6 +19,8 @@ namespace Assets.Game.Scripts.GardenBeds
             _seasonController = seasonController;
             _storeHouse = storeHouse;
             gardenBedView.InteractedEvent += OnInteracted;
+
+            _points = Object.Instantiate(GardenBedView.PlantConfig.PointsForPlant,GardenBedView.AnchorForPoint);
         }
 
         public GardenBedView GardenBedView { get; }
@@ -33,7 +37,7 @@ namespace Assets.Game.Scripts.GardenBeds
             else if (_plant == null)
             {
                 _plant = new Plant(GardenBedView.PlantConfig, _seasonController);
-                _plant.Spawn(GardenBedView.Points, GardenBedView.transform);
+                _plant.Spawn(_points.Points, GardenBedView.transform);
             }
         }
     }
