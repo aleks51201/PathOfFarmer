@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Game.Scripts.Builders
 {
-    [RequireComponent(typeof(Collider),typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
     public class BuildObfectView : MonoBehaviour, IBuildObject
     {
         [SerializeField, FoldoutGroup("Components")] private Renderer _renderer;

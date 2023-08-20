@@ -8,7 +8,7 @@ namespace Assets.Game.Scripts.Builders
     {
         private List<GameObject> _gameObjects;
 
-        public BuildObjectCollisionHolder() 
+        public BuildObjectCollisionHolder()
         {
             _gameObjects = new();
         }
@@ -37,7 +37,7 @@ namespace Assets.Game.Scripts.Builders
 
         public void Reset()
         {
-            _gameObjects.Clear(); 
+            _gameObjects.Clear();
         }
 
         private bool CheckItIsPlane(Collider collider)

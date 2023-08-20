@@ -11,10 +11,10 @@ namespace Assets.Game.Scripts.Plants
         [SerializeField] private int _value;
 
 
-        public string Name => _name; 
-        public string Description => _description; 
-        public Sprite Icon => _icon; 
-        public int Weight => _weight; 
-        public int Value => _value; 
+        public string Name => _name;
+        public string Description => _description;
+        public Sprite Icon => _icon;
+        public int Weight => _weight;
+        public int Value => _value;
     }
 }

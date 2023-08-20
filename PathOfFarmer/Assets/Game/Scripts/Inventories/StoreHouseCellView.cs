@@ -11,7 +11,7 @@ namespace Assets.Game.Scripts.Inventories
         [SerializeField, FoldoutGroup("Component")] private TMP_Text _count;
         [SerializeField, FoldoutGroup("Component")] private Image _image;
 
-        public TMP_Text Name => _name; 
+        public TMP_Text Name => _name;
         public TMP_Text Count => _count;
         public Image Image => _image;
     }

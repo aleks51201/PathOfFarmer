@@ -48,7 +48,7 @@ namespace Assets.Game.Scripts.Builders
 
         public void Rotate()
         {
-            _buildObject.View.transform.Rotate(_buildObject.View.transform.rotation.x,_buildObject.View.transform.rotation.y + 90,_buildObject.View.transform.rotation.z);
+            _buildObject.View.transform.Rotate(_buildObject.View.transform.rotation.x, _buildObject.View.transform.rotation.y + 90, _buildObject.View.transform.rotation.z);
         }
 
         private bool TryCastRay(out Vector3 point)
@@ -57,7 +57,7 @@ namespace Assets.Game.Scripts.Builders
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity,~ (1 << 6)))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, ~(1 << 6)))
             {
                 Debug.Log($"TryCastRay {hit.transform.name}");
                 if (hit.transform.CompareTag("Plane"))

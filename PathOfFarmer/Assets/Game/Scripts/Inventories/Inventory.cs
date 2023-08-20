@@ -33,7 +33,7 @@ namespace Assets.Game.Scripts.Inventories
             return newCell;
         }
 
-        public void AddItem(IItem item,bool merge)
+        public void AddItem(IItem item, bool merge)
         {
             Cell emptyCell = null;
 

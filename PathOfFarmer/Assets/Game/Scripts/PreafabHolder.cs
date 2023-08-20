@@ -7,6 +7,6 @@ namespace Assets.Game.Scripts
     {
         [SerializeField] private PlantView[] _plantViews;
 
-        public PlantView[] PlantViews => _plantViews; 
+        public PlantView[] PlantViews => _plantViews;
     }
 }

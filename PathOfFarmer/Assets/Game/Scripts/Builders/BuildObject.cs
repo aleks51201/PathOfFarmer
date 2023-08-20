@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.Builders
@@ -96,7 +94,7 @@ namespace Assets.Game.Scripts.Builders
         {
             var components = View.GetComponentsInChildren<Transform>();
 
-            foreach(var component in components)
+            foreach (var component in components)
             {
                 component.gameObject.layer = 0;
             }

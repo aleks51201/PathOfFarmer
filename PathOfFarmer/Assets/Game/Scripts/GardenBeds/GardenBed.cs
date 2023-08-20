@@ -30,7 +30,7 @@ namespace Assets.Game.Scripts.GardenBeds
                 _plant.Delete();
                 _plant = null;
             }
-            else if(_plant == null)
+            else if (_plant == null)
             {
                 _plant = new Plant(GardenBedView.PlantConfig, _seasonController);
                 _plant.Spawn(GardenBedView.Points, GardenBedView.transform);

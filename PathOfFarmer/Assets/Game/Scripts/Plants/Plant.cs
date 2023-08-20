@@ -37,9 +37,9 @@ namespace Assets.Game.Scripts.Plants
                 _plantViews.Add(go.GetComponent<PlantView>());
             }
 
-            SpawnStages( points);
+            SpawnStages(points);
 
-            _currentStageGo= _growthStages.GetFirst();
+            _currentStageGo = _growthStages.GetFirst();
             _currentStageGo.Acivate();
             _currentStageGo.StageCompletedEvent += OnStageCompleted;
         }
@@ -70,11 +70,11 @@ namespace Assets.Game.Scripts.Plants
         {
             var growthStages = new List<GrowthStage>();
 
-            for(var i = 0; i< _plantStatsConfig.PlantStages.Length; i++)
+            for (var i = 0; i < _plantStatsConfig.PlantStages.Length; i++)
             {
                 var stageGameObjects = new List<GameObject>();
 
-                for(var j  = 0;j < points.Length; j++)
+                for (var j = 0; j < points.Length; j++)
                 {
                     var newStageGo = Object.Instantiate(
                         _plantStatsConfig.PlantStages[i]._prefabStage,

@@ -10,7 +10,7 @@ namespace Assets.Game.Scripts.Inventories
         private IItem _item;
 
         public Cell()
-        { 
+        {
         }
 
         public IItem Item
@@ -35,7 +35,7 @@ namespace Assets.Game.Scripts.Inventories
             }
         }
 
-        public event Action<IItem> ItemUpdatedEvent= delegate { };
+        public event Action<IItem> ItemUpdatedEvent = delegate { };
         public event Action<int> ItemCountUpdatedEvent = delegate { };
     }
 
