@@ -22,9 +22,9 @@ namespace Assets.Game.Scripts.Inventories
 
         }
 
-        public void AddItem(IItem item)
+        public void AddItem(IItem item, bool merge = true)
         {
-            _inventory.AddItem(item);
+            _inventory.AddItem(item, merge);
         }
 
         public void DeleteItem()
