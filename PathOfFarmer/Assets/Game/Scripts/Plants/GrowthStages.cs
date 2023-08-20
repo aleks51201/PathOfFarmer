@@ -40,33 +40,46 @@ namespace Assets.Game.Scripts.Plants
 
         public GrowthStage(GameObject stageObject, int numGrowingSeasons, SeasonController seasonController)
         {
-            StageObject = stageObject;
+            StageObjects = new GameObject[]{ stageObject };
+            _numGrowingSeasons = numGrowingSeasons;
+            _seasonController = seasonController;
+        }
+        public GrowthStage(GameObject[] stageObjects, int numGrowingSeasons, SeasonController seasonController)
+        {
+            StageObjects = stageObjects;
             _numGrowingSeasons = numGrowingSeasons;
             _seasonController = seasonController;
         }
 
-        public GameObject StageObject { get; }
+        public GameObject[] StageObjects { get; }
         public bool StageCompleted => _currentStage >= _numGrowingSeasons;
 
         public event Action StageCompletedEvent = delegate { };
 
         public void Acivate()
         {
-            Debug.Log("Acivate");
-            StageObject.SetActive(true);
+            foreach(var stage in StageObjects)
+            {
+                stage.SetActive(true);
+            }
+
             _seasonController.UpdatedEvent += OnSeasonUpdated;
         }
 
         public void Deactivate()
         {
-            Debug.Log("Deactivate");
-            StageObject.SetActive(false);
+            foreach(var stage in StageObjects)
+            {
+                stage.SetActive(false);
+            }
+
             _seasonController.UpdatedEvent -= OnSeasonUpdated;
         }
 
         private void OnSeasonUpdated(int _)
         {
             _currentStage++;
+
             if (StageCompleted)
             {
                 StageCompletedEvent.Invoke();

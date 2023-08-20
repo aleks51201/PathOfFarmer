@@ -10,8 +10,8 @@ namespace Assets.Game.Scripts.Plants
         private readonly PlantStatsConfig _plantStatsConfig;
         private readonly SeasonController _seasonController;
         private List<PlantView> _plantViews = new();
-        private List<GrowthStage> _currentStageGo = new();
-        private List<GrowthStages> _growthStages = new();
+        private GrowthStage _currentStageGo;
+        private GrowthStages _growthStages;
         private int _currenStage;
 
         public Plant(PlantStatsConfig plantStatsConfig, SeasonController seasonController)
@@ -27,7 +27,6 @@ namespace Assets.Game.Scripts.Plants
 
         public void Spawn(Transform[] points, Transform parentTransform)
         {
-            _growthStages.Clear();
             foreach (Transform point in points)
             {
                 var go = new GameObject(_plantStatsConfig.Name);
@@ -35,73 +34,63 @@ namespace Assets.Game.Scripts.Plants
                 go.transform.position = point.position;
                 go.AddComponent<PlantView>();
 
-                _growthStages.Add(new GrowthStages(SpawnStages(go.transform, point)));
-
                 _plantViews.Add(go.GetComponent<PlantView>());
             }
 
-            foreach (var item in _growthStages)
-            {
-                var first = item.GetFirst();
-                first.Acivate();
-                first.StageCompletedEvent += OnStageCompleted;
-                _currentStageGo.Add(first);
-            }
+            SpawnStages( points);
+
+            _currentStageGo= _growthStages.GetFirst();
+            _currentStageGo.Acivate();
+            _currentStageGo.StageCompletedEvent += OnStageCompleted;
         }
 
         private void OnStageCompleted()
         {
             if (GrowthCompleted) return;
 
-            foreach (var item in _growthStages)
+            if (!_growthStages.HaveNext())
             {
-                if (!item.HaveNext())
-                {
-                    GrowthCompleted = true;
-                    foreach (var itemJ in _currentStageGo)
-                    {
-                        itemJ.StageCompletedEvent -= OnStageCompleted;
-                    }
-                    return;
-                }
+                GrowthCompleted = true;
+
+                _currentStageGo.StageCompletedEvent -= OnStageCompleted;
+
+                return;
             }
 
-            foreach (var item in _currentStageGo)
-            {
-                item.Deactivate();
-                item.StageCompletedEvent -= OnStageCompleted;
-            }
+            _currentStageGo.Deactivate();
+            _currentStageGo.StageCompletedEvent -= OnStageCompleted;
 
+            _currentStageGo = _growthStages.GetNext();
 
-            _currentStageGo.Clear();
-            foreach (var item in _growthStages)
-            {
-                _currentStageGo.Add(item.GetNext());
-            }
-
-
-            foreach (var item in _currentStageGo)
-            {
-                item.Acivate();
-                item.StageCompletedEvent += OnStageCompleted;
-            }
+            _currentStageGo.Acivate();
+            _currentStageGo.StageCompletedEvent += OnStageCompleted;
         }
 
-        private GrowthStage[] SpawnStages(Transform parentTransform, Transform point)
+        private void SpawnStages(Transform[] points)
         {
-            List<GrowthStage> stages = new();
+            var growthStages = new List<GrowthStage>();
 
-            for (var i = 0; i < _plantStatsConfig.PlantStages.Length; i++)
+            for(var i = 0; i< _plantStatsConfig.PlantStages.Length; i++)
             {
-                var newStageGo = Object.Instantiate(_plantStatsConfig.PlantStages[i]._prefabStage, point.position, _plantStatsConfig.PlantStages[i]._prefabStage.transform.rotation, parentTransform);
-                newStageGo.SetActive(false);
+                var stageGameObjects = new List<GameObject>();
 
-                var stage = new GrowthStage(newStageGo, _plantStatsConfig.PlantStages[i]._seasons, _seasonController);
+                for(var j  = 0;j < points.Length; j++)
+                {
+                    var newStageGo = Object.Instantiate(
+                        _plantStatsConfig.PlantStages[i]._prefabStage,
+                        points[j].position,
+                        _plantStatsConfig.PlantStages[i]._prefabStage.transform.rotation,
+                        _plantViews[j].transform);
 
-                stages.Add(stage);
+                    newStageGo.SetActive(false);
+
+                    stageGameObjects.Add(newStageGo);
+                }
+
+                growthStages.Add(new GrowthStage(stageGameObjects.ToArray(), _plantStatsConfig.PlantStages[i]._seasons, _seasonController));
             }
 
-            return (stages.ToArray());
+            _growthStages = new GrowthStages(growthStages.ToArray());
         }
 
         public void Delete()
