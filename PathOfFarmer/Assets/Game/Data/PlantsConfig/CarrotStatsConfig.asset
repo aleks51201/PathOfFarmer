@@ -18,13 +18,13 @@ MonoBehaviour:
   _weight: 10
   _value: 1
   _plantStages:
-  - _prefabStage: {fileID: 7074363091319872407, guid: 4b7995c60cc052246b89b68856128207, type: 3}
+  - _prefabStage: {fileID: 6301317239170012438, guid: bb1661331f01c29489b02cac6205b43d, type: 3}
     _seasons: 1
-  - _prefabStage: {fileID: 4799204443768753562, guid: c4c025dc13c84a342b9083abdc79eff9, type: 3}
+  - _prefabStage: {fileID: 6136755730809650270, guid: 84819994429071a40a9136054a5aaad0, type: 3}
     _seasons: 1
-  - _prefabStage: {fileID: 2007838900476353675, guid: 33d829c00b4abbf498d787bcb61af5ca, type: 3}
+  - _prefabStage: {fileID: 8984879322143932946, guid: be3e3da279597e44cb24a13b2e38f7f2, type: 3}
     _seasons: 1
-  - _prefabStage: {fileID: 7833312611034158358, guid: eb57a5559fda8424c81015e8f7da8da6, type: 3}
+  - _prefabStage: {fileID: 5358469980626990200, guid: adf3ea7bf853d034bbfe22fe8e466c19, type: 3}
     _seasons: 1
-  - _prefabStage: {fileID: 4767953989033662006, guid: ca8e78f025ef42047b7942ee80312804, type: 3}
-    _seasons: 1
+  - _prefabStage: {fileID: 6016805153511650589, guid: d291706dc07db3642b70d6043e2eb233, type: 3}
+    _seasons: 0
