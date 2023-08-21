@@ -1,5 +1,4 @@
 ﻿using Assets.Game.Scripts.GardenBeds;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Assets.Game.Scripts.Plants

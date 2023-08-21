@@ -1,9 +1,4 @@
-﻿using Assets.Game.Scripts.Seasons;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Assets.Game.Scripts.Ui
+﻿namespace Assets.Game.Scripts.Ui
 {
     public class SeasonTextDisplay : TextDisplay
     {

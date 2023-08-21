@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Assets.Game.Scripts.Plants
 {
-    [CreateAssetMenu(fileName ="PlantStatsConfig",menuName = "SO/PlantStatsConfig")]
-    public class PlantStatsConfig: BaseStoreHouseCellConfig
+    [CreateAssetMenu(fileName = "PlantStatsConfig", menuName = "SO/PlantStatsConfig")]
+    public class PlantStatsConfig : BaseStoreHouseCellConfig
     {
-        [SerializeField] private PlantStage[] _plantStages;
+        [SerializeField, BoxGroup("GrowthStage")] private PlantStage[] _plantStages;
+        [SerializeField, BoxGroup("GrowthStage")] private PointsForPlantView _pointsForPlant;
 
-        public PlantStage[] PlantStages => _plantStages; 
+
+        public PlantStage[] PlantStages => _plantStages;
+        public PointsForPlantView PointsForPlant => _pointsForPlant; 
     }
 
 

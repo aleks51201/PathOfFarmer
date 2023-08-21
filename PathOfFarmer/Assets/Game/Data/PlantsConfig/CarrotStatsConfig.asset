@@ -18,13 +18,10 @@ MonoBehaviour:
   _weight: 10
   _value: 1
   _plantStages:
-  - _prefabStage: {fileID: 6301317239170012438, guid: bb1661331f01c29489b02cac6205b43d, type: 3}
-    _seasons: 1
-  - _prefabStage: {fileID: 6136755730809650270, guid: 84819994429071a40a9136054a5aaad0, type: 3}
-    _seasons: 1
-  - _prefabStage: {fileID: 8984879322143932946, guid: be3e3da279597e44cb24a13b2e38f7f2, type: 3}
-    _seasons: 1
+  - _prefabStage: {fileID: 919132149155446097, guid: 152e0cb7dfcf0ea46978594188ec6e00, type: 3}
+    _seasons: 2
   - _prefabStage: {fileID: 5358469980626990200, guid: adf3ea7bf853d034bbfe22fe8e466c19, type: 3}
-    _seasons: 1
+    _seasons: 3
   - _prefabStage: {fileID: 6016805153511650589, guid: d291706dc07db3642b70d6043e2eb233, type: 3}
     _seasons: 0
+  _pointsForPlant: {fileID: 6887571659722287014, guid: 0b92a8489349d65429df156761b0cb34, type: 3}

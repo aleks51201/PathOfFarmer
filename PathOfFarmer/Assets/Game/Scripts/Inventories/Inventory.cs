@@ -33,14 +33,25 @@ namespace Assets.Game.Scripts.Inventories
             return newCell;
         }
 
-        public void AddItem(IItem item)
+        public void AddItem(IItem item, bool merge)
         {
             Cell emptyCell = null;
-            foreach(var cell in _cells)
+
+            if (merge)
             {
-                if(cell.Count == 0)
+                if (HaveEqualItem(item))
                 {
-                    emptyCell = cell;
+                    emptyCell = FindCellWithEqualItem(item);
+                }
+            }
+            else
+            {
+                foreach (var cell in _cells)
+                {
+                    if (cell.Count == 0)
+                    {
+                        emptyCell = cell;
+                    }
                 }
             }
 
@@ -50,7 +61,17 @@ namespace Assets.Game.Scripts.Inventories
             }
 
             emptyCell.Item = item;
-            emptyCell.Count = 1;
+            emptyCell.Count += 1;
+        }
+
+        private bool HaveEqualItem(IItem item)
+        {
+            return _cells.Any(cell => cell.Item.Config.Name == item.Config.Name);
+        }
+
+        private Cell FindCellWithEqualItem(IItem item)
+        {
+            return _cells.First(cell => cell.Item.Config.Name == item.Config.Name);
         }
     }
 }

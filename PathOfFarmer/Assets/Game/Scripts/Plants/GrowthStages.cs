@@ -1,6 +1,4 @@
-﻿using Assets.Game.Scripts.Seasons;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Game.Scripts.Plants
 {
@@ -29,48 +27,6 @@ namespace Assets.Game.Scripts.Plants
         {
             _currentIndex = Mathf.Clamp(_currentIndex + 1, 0, _stages.Length - 1);
             return _stages[_currentIndex];
-        }
-    }
-
-    public class GrowthStage
-    {
-        private readonly int _numGrowingSeasons;
-        private readonly SeasonController _seasonController;
-        private int _currentStage;
-
-        public GrowthStage(GameObject stageObject, int numGrowingSeasons, SeasonController seasonController)
-        {
-            StageObject = stageObject;
-            _numGrowingSeasons = numGrowingSeasons;
-            _seasonController = seasonController;
-        }
-
-        public GameObject StageObject { get; }
-        public bool StageCompleted => _currentStage >= _numGrowingSeasons;
-
-        public event Action StageCompletedEvent = delegate { };
-
-        public void Acivate()
-        {
-            Debug.Log("Acivate");
-            StageObject.SetActive(true);
-            _seasonController.UpdatedEvent += OnSeasonUpdated;
-        }
-
-        public void Deactivate()
-        {
-            Debug.Log("Deactivate");
-            StageObject.SetActive(false);
-            _seasonController.UpdatedEvent -= OnSeasonUpdated;
-        }
-
-        private void OnSeasonUpdated(int _)
-        {
-            _currentStage++;
-            if (StageCompleted)
-            {
-                StageCompletedEvent.Invoke();
-            }
         }
     }
 }

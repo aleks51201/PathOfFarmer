@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Assets.Game.Scripts.Seasons
 {
-    public class SeasonController 
+    public class SeasonController
     {
         private int _season;
         private CustomInput _customInput;
@@ -16,7 +16,7 @@ namespace Assets.Game.Scripts.Seasons
             _customInput.Player.Season.performed += OnPerformed;
         }
 
-        public int Season 
+        public int Season
         {
             get => _season;
             private set
