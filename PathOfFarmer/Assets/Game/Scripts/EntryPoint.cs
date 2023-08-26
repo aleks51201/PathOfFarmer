@@ -1,4 +1,5 @@
 using Assets.Game.Scripts.Builders;
+using Assets.Game.Scripts.BuildStates;
 using Assets.Game.Scripts.GardenBeds;
 using Assets.Game.Scripts.Inventories;
 using Assets.Game.Scripts.Players;
@@ -15,6 +16,7 @@ namespace Assets.Game.Scripts
         [SerializeField] private Transform _spawnHolder;
         [SerializeField] private GardenBedView _gardenBedView;
         [SerializeField] private StoreHouseView _storeHouseView;
+        [SerializeField] private BuildinObjectConfig _buildingObjectConfig;
 
         private SeasonController _seasonController;
         private Player _player;
@@ -39,7 +41,7 @@ namespace Assets.Game.Scripts
 
         private void Start()
         {
-            _uiMediator.Initialize(_seasonController);
+            _uiMediator.Initialize(_seasonController, _buildingObjectConfig);
             _player.Start();
             _buildController.Start();
             _interactor.Start();

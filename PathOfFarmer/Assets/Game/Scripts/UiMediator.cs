@@ -1,4 +1,5 @@
-﻿using Assets.Game.Scripts.Seasons;
+﻿using Assets.Game.Scripts.BuildStates;
+using Assets.Game.Scripts.Seasons;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,16 +10,19 @@ namespace Assets.Game.Scripts
     {
         [SerializeField] private MonoBehaviour[] _monoBehaviours;
 
-        public SeasonController SeasonController { get; private set; }
-
         private CustomInput _customInput;
+
+        public SeasonController SeasonController { get; private set; }
+        public BuildinObjectConfig BuildinObjectConfig { get; private set; }
+
 
         public event Action StartOpenGardenPanelEvent = delegate { };
         public event Action StartOpenInventoryPanelEvent = delegate { };
 
-        public void Initialize(SeasonController seasonController)
+        public void Initialize(SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
         {
-            SeasonController = seasonController;
+            SeasonController = seasonController ?? throw new ArgumentNullException(nameof(seasonController));
+            BuildinObjectConfig = buildingObjectConfig ?? throw new ArgumentNullException(nameof(buildingObjectConfig));
 
             _customInput = new CustomInput();
             _customInput.Enable();
