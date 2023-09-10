@@ -10,10 +10,10 @@ namespace Assets.Game.Scripts.Players
         private CustomInput _customInput;
         private Vector2 _direction;
 
-        public Mover(Player player)
+        public Mover(Player player, CustomInput input)
         {
             _player = player ?? throw new ArgumentNullException(nameof(player));
-            _customInput = new CustomInput();
+            _customInput = input;
             Speed = player.PlayerView.MovementSpeed;
         }
 
@@ -21,8 +21,6 @@ namespace Assets.Game.Scripts.Players
 
         public void Start()
         {
-            _customInput.Enable();
-
             _customInput.Player.Move.performed += OnPerfomed;
             _customInput.Player.Move.canceled += OnCanceled;
         }

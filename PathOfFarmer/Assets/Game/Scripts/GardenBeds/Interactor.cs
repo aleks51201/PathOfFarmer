@@ -11,9 +11,9 @@ namespace Assets.Game.Scripts.GardenBeds
         private readonly BuildController _buildController;
         private IInteractable _interactableObject;
 
-        public Interactor(BuildController buildController)
+        public Interactor(BuildController buildController, CustomInput input)
         {
-            _customInput = new CustomInput();
+            _customInput = input ?? throw new ArgumentNullException(nameof(input));
             _buildController = buildController ?? throw new ArgumentNullException(nameof(buildController));
         }
 

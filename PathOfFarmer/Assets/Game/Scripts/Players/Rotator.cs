@@ -10,10 +10,10 @@ namespace Assets.Game.Scripts.Players
         private CustomInput _customInput;
         private Vector2 _direction;
 
-        public Rotator(Player player)
+        public Rotator(Player player, CustomInput input)
         {
             _player = player ?? throw new ArgumentNullException(nameof(player));
-            _customInput = new CustomInput();
+            _customInput = input; 
             Speed = player.PlayerView.RotateSpeed;
         }
 

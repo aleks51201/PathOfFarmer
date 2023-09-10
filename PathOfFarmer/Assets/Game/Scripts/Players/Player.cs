@@ -7,11 +7,11 @@ namespace Assets.Game.Scripts.Players
         private Mover _mover;
         private Rotator _rotator;
 
-        public Player(PlayerView playerView)
+        public Player(PlayerView playerView, CustomInput input)
         {
             PlayerView = playerView;
-            _mover = new Mover(this);
-            _rotator = new Rotator(this);
+            _mover = new Mover(this, input);
+            _rotator = new Rotator(this, input);
         }
 
         public PlayerView PlayerView { get; set; }

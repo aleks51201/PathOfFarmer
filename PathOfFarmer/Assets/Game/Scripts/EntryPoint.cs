@@ -18,6 +18,7 @@ namespace Assets.Game.Scripts
         [SerializeField] private StoreHouseView _storeHouseView;
         [SerializeField] private BuildinObjectConfig _buildingObjectConfig;
 
+        private CustomInput _customInput;
         private SeasonController _seasonController;
         private Player _player;
         private GardenBed _gardenBed;
@@ -30,18 +31,20 @@ namespace Assets.Game.Scripts
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            _seasonController = new SeasonController();
+            _customInput = new CustomInput();
+            _customInput.Enable();
 
-            _player = new Player(_playerView);
-            _buildController = new BuildController(_spawnHolder, _uiMediator);
-            _interactor = new Interactor(_buildController);
+            _seasonController = new SeasonController(_customInput);
+            _player = new Player(_playerView,_customInput);
+            _buildController = new BuildController(_spawnHolder, _uiMediator, _customInput);
+            _interactor = new Interactor(_buildController,_customInput);
             _storeHouse = new StoreHouse(_storeHouseView);
             _gardenBed = new GardenBed(_gardenBedView, _seasonController, _storeHouse);
         }
 
         private void Start()
         {
-            _uiMediator.Initialize(_seasonController, _buildingObjectConfig);
+            _uiMediator.Initialize(_customInput,_seasonController, _buildingObjectConfig);
             _player.Start();
             _buildController.Start();
             _interactor.Start();

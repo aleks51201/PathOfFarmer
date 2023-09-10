@@ -8,9 +8,9 @@ namespace Assets.Game.Scripts.Seasons
         private int _season;
         private CustomInput _customInput;
 
-        public SeasonController()
+        public SeasonController(CustomInput input)
         {
-            _customInput = new CustomInput();
+            _customInput = input ?? throw new ArgumentNullException(nameof(input));
             _customInput.Enable();
 
             _customInput.Player.Season.performed += OnPerformed;

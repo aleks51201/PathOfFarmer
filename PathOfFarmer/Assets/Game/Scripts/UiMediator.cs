@@ -15,20 +15,20 @@ namespace Assets.Game.Scripts
 
         public SeasonController SeasonController { get; private set; }
         public BuildinObjectConfig BuildinObjectConfig { get; private set; }
-
+        public CustomInput CustomInput => _customInput;
 
         public event Action StartOpenGardenPanelEvent = delegate { };
         public event Action StartOpenInventoryPanelEvent = delegate { };
         public event Action StartOpenBuilderPanelEvent = delegate { };
+        public event Action StartCloseBuilderPanelEvent = delegate { };
         public event Action<BuildObjectView> BuildObjectSelectedEvent = delegate { };
 
-        public void Initialize(SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
+        public void Initialize(CustomInput input,SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
         {
             SeasonController = seasonController ?? throw new ArgumentNullException(nameof(seasonController));
             BuildinObjectConfig = buildingObjectConfig ?? throw new ArgumentNullException(nameof(buildingObjectConfig));
 
-            _customInput = new CustomInput();
-            _customInput.Enable();
+            _customInput = input;
 
             _customInput.Player.Inventory.performed += OnInvenoryOpen;
 
@@ -60,6 +60,11 @@ namespace Assets.Game.Scripts
         {
             StartOpenBuilderPanelEvent.Invoke();
         }
+        public void CloseBuilderPanel()
+        {
+            StartCloseBuilderPanelEvent.Invoke();
+        }
+
         public void OnBuildObjectSelected(BuildObjectView prefab)
         {
             BuildObjectSelectedEvent.Invoke(prefab);
