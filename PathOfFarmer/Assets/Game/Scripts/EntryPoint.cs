@@ -17,6 +17,7 @@ namespace Assets.Game.Scripts
         [SerializeField] private GardenBedView _gardenBedView;
         [SerializeField] private StoreHouseView _storeHouseView;
         [SerializeField] private BuildinObjectConfig _buildingObjectConfig;
+        [SerializeField] private GardenBedHolderView _gardenBedHolderView;
 
         private CustomInput _customInput;
         private SeasonController _seasonController;
@@ -25,6 +26,7 @@ namespace Assets.Game.Scripts
         private BuildController _buildController;
         private Interactor _interactor;
         private StoreHouse _storeHouse;
+        private GardenBedHolder _gardenBedHolder;
 
         private void Awake()
         {
@@ -39,7 +41,7 @@ namespace Assets.Game.Scripts
             _buildController = new BuildController(_spawnHolder, _uiMediator, _customInput);
             _interactor = new Interactor(_buildController, _customInput);
             _storeHouse = new StoreHouse(_storeHouseView);
-            _gardenBed = new GardenBed(_gardenBedView, _seasonController, _storeHouse);
+            _gardenBedHolder = new GardenBedHolder(_gardenBedHolderView,_buildController, _seasonController, _storeHouse);
         }
 
         private void Start()

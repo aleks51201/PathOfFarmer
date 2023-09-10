@@ -21,6 +21,8 @@ namespace Assets.Game.Scripts.Builders
 
         public bool IsBuildingStage => _builder.IsBuilding;
 
+        public event Action<GameObject> BuildCompletedEvent = delegate { };
+
         public void Start()
         {
             _customInput.Player.Build.performed += OnBuildClick;
@@ -71,11 +73,20 @@ namespace Assets.Game.Scripts.Builders
 
         private void OnFireClick(CallbackContext context)
         {
+            _builder.BuildCompletedEvent += OnBuildComleted;
+
             _builder.Build();
 
             _customInput.Player.Build.performed += OnBuildClick;
             _customInput.Player.Fire.performed -= OnFireClick;
             _customInput.Player.Rotate.performed -= OnRotateClick;
+        }
+
+        private void OnBuildComleted(GameObject buildingObject)
+        {
+            BuildCompletedEvent.Invoke(buildingObject);
+
+            _builder.BuildCompletedEvent -= OnBuildComleted;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Game.Scripts.Builders
 {
@@ -13,6 +14,8 @@ namespace Assets.Game.Scripts.Builders
         }
 
         public bool IsBuilding { get; private set; }
+
+        public event Action<GameObject> BuildCompletedEvent = delegate { };
 
         public void Start()
         {
@@ -38,9 +41,26 @@ namespace Assets.Game.Scripts.Builders
 
         public void Build()
         {
+            _buildObject.BuildCompletedEvent += OnBuildCompleted;
+            _buildObject.BuildCanceledEvent += OnBuildCanceled;
+
             Stop();
 
             _buildObject.Complete();
+        }
+
+        private void OnBuildCanceled()
+        {
+            _buildObject.BuildCompletedEvent -= OnBuildCompleted;
+            _buildObject.BuildCanceledEvent -= OnBuildCanceled;
+        }
+
+        private void OnBuildCompleted(GameObject buildingObject)
+        {
+            BuildCompletedEvent.Invoke(buildingObject);
+
+            _buildObject.BuildCompletedEvent -= OnBuildCompleted;
+            _buildObject.BuildCanceledEvent -= OnBuildCanceled;
         }
 
         public void ChangeBuildObject(BuildObjectView ghost, GameObject buildObject)

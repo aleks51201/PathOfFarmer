@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Assets.Game.Scripts.Builders
@@ -23,6 +24,8 @@ namespace Assets.Game.Scripts.Builders
         public GameObject Prefab { get; }
         public BuildObjectView View { get; private set; }
 
+        public event Action<GameObject> BuildCompletedEvent = delegate { };
+        public event Action BuildCanceledEvent = delegate { };
 
         public BuildObjectView Spawn()
         {
@@ -43,10 +46,15 @@ namespace Assets.Game.Scripts.Builders
 
         public void Complete()
         {
-            Object.Destroy(View.gameObject);
-            if (_collisionHolder.CollisionCount != 0) return;
+            if (_collisionHolder.CollisionCount != 0)
+            {
+                Object.Destroy(View.gameObject);
+                BuildCanceledEvent.Invoke();
+                return;
+            }
 
-            Object.Instantiate(Prefab, View.transform.position, View.transform.rotation, _parentTransform);
+            var newObject = Object.Instantiate(Prefab, View.transform.position, View.transform.rotation, _parentTransform);
+            Object.Destroy(View.gameObject);
 
             Unsub();
 
@@ -55,6 +63,7 @@ namespace Assets.Game.Scripts.Builders
             ResetMaterial();
 
             _isCompleted = true;
+            BuildCompletedEvent.Invoke(newObject);
         }
 
         public void Cancel()

@@ -452,6 +452,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 112311839}
+  - {fileID: 1826923849}
   m_Father: {fileID: 811191766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1149,7 +1150,6 @@ Transform:
   - {fileID: 1012439506}
   - {fileID: 2010386149}
   - {fileID: 1565869023}
-  - {fileID: 499333623}
   - {fileID: 297337166}
   m_Father: {fileID: 1576998565}
   m_RootOrder: -1
@@ -1942,6 +1942,7 @@ MonoBehaviour:
   _gardenBedView: {fileID: 499333620}
   _storeHouseView: {fileID: 1065743814}
   _buildingObjectConfig: {fileID: 11400000, guid: f72502d82c1963d4baa2c7be35955e07, type: 2}
+  _gardenBedHolderView: {fileID: 1826923848}
 --- !u!4 &1576998565
 Transform:
   m_ObjectHideFlags: 0
@@ -2150,13 +2151,60 @@ Transform:
   m_Father: {fileID: 1576998565}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1826923847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1826923849}
+  - component: {fileID: 1826923848}
+  m_Layer: 0
+  m_Name: GardenBedHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1826923848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826923847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8317f2e3c0335964a954d161c5098d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gardenBeds:
+  - {fileID: 499333620}
+--- !u!4 &1826923849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826923847}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 499333623}
+  m_Father: {fileID: 297337166}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1884884976
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 811191766}
+    m_TransformParent: {fileID: 1826923849}
     m_Modifications:
     - target: {fileID: 315697476541778794, guid: f8b0f6a0684f2dc429152e6092b3f9de, type: 3}
       propertyPath: m_LocalPosition.y
