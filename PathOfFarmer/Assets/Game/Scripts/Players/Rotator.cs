@@ -13,7 +13,7 @@ namespace Assets.Game.Scripts.Players
         public Rotator(Player player, CustomInput input)
         {
             _player = player ?? throw new ArgumentNullException(nameof(player));
-            _customInput = input; 
+            _customInput = input;
             Speed = player.PlayerView.RotateSpeed;
         }
 

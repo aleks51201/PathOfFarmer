@@ -44,7 +44,7 @@ namespace Assets.Game.Scripts.Builders
         public void Complete()
         {
             Object.Destroy(View.gameObject);
-            if (_collisionHolder.CollisionCount != 0)  return; 
+            if (_collisionHolder.CollisionCount != 0) return;
 
             Object.Instantiate(Prefab, View.transform.position, View.transform.rotation, _parentTransform);
 

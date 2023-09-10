@@ -28,14 +28,14 @@ namespace Assets.Game.Scripts.BuildStates
 
         private void CreateCells()
         {
-            foreach(var item in _buildConfig.Builds)
+            foreach (var item in _buildConfig.Builds)
             {
                 BuildingInventoryCellView cell = Instantiate(_cellPrefab, _container);
                 cell.Name.text = item.Name;
                 cell.Cost.text = $"{item.Cost}";
                 cell.Image.sprite = item.Icon;
 
-                _buildObjectMap.Add(cell,new BuildObjects( item.GhostPrefab,item.BuilingObjectPrefab));
+                _buildObjectMap.Add(cell, new BuildObjects(item.GhostPrefab, item.BuilingObjectPrefab));
 
                 cell.ButtonClickedEvent += OnSelected;
             }
@@ -53,10 +53,10 @@ namespace Assets.Game.Scripts.BuildStates
         public BuildObjectView GhostPrefab;
         public BuildObjectView BuilingObjectPrefab;
 
-        public BuildObjects(BuildObjectView ghostPrefab,BuildObjectView builingObjectPrefab)
+        public BuildObjects(BuildObjectView ghostPrefab, BuildObjectView builingObjectPrefab)
         {
-            GhostPrefab =ghostPrefab ;
-            BuilingObjectPrefab =builingObjectPrefab;
+            GhostPrefab = ghostPrefab;
+            BuilingObjectPrefab = builingObjectPrefab;
         }
     }
 }

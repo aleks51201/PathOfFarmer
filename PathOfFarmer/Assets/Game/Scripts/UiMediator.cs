@@ -1,5 +1,4 @@
-﻿using Assets.Game.Scripts.Builders;
-using Assets.Game.Scripts.BuildStates;
+﻿using Assets.Game.Scripts.BuildStates;
 using Assets.Game.Scripts.Seasons;
 using System;
 using UnityEngine;
@@ -23,7 +22,7 @@ namespace Assets.Game.Scripts
         public event Action StartCloseBuilderPanelEvent = delegate { };
         public event Action<BuildObjects> BuildObjectSelectedEvent = delegate { };
 
-        public void Initialize(CustomInput input,SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
+        public void Initialize(CustomInput input, SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
         {
             SeasonController = seasonController ?? throw new ArgumentNullException(nameof(seasonController));
             BuildinObjectConfig = buildingObjectConfig ?? throw new ArgumentNullException(nameof(buildingObjectConfig));

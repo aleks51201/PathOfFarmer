@@ -55,7 +55,7 @@ namespace Assets.Game.Scripts.Builders
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            _builder.ChangeBuildObject(prefabs.GhostPrefab,prefabs.BuilingObjectPrefab);
+            _builder.ChangeBuildObject(prefabs.GhostPrefab, prefabs.BuilingObjectPrefab);
             _builder.Start();
 
             _customInput.Player.Enable();

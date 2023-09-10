@@ -20,7 +20,7 @@ namespace Assets.Game.Scripts.GardenBeds
             _storeHouse = storeHouse;
             gardenBedView.InteractedEvent += OnInteracted;
 
-            _points = Object.Instantiate(GardenBedView.PlantConfig.PointsForPlant,GardenBedView.AnchorForPoint);
+            _points = Object.Instantiate(GardenBedView.PlantConfig.PointsForPlant, GardenBedView.AnchorForPoint);
         }
 
         public GardenBedView GardenBedView { get; }

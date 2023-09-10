@@ -13,7 +13,7 @@ namespace Assets.Game.Scripts.GardenBeds
 
         //public Transform[] Points => _points;
         public PlantStatsConfig PlantConfig => _plantConfig;
-        public Transform AnchorForPoint => _anchorForPoint; 
+        public Transform AnchorForPoint => _anchorForPoint;
 
         public event Action InteractedEvent = delegate { };
 

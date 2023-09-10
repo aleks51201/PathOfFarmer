@@ -35,16 +35,16 @@ namespace Assets.Game.Scripts
             _customInput.Enable();
 
             _seasonController = new SeasonController(_customInput);
-            _player = new Player(_playerView,_customInput);
+            _player = new Player(_playerView, _customInput);
             _buildController = new BuildController(_spawnHolder, _uiMediator, _customInput);
-            _interactor = new Interactor(_buildController,_customInput);
+            _interactor = new Interactor(_buildController, _customInput);
             _storeHouse = new StoreHouse(_storeHouseView);
             _gardenBed = new GardenBed(_gardenBedView, _seasonController, _storeHouse);
         }
 
         private void Start()
         {
-            _uiMediator.Initialize(_customInput,_seasonController, _buildingObjectConfig);
+            _uiMediator.Initialize(_customInput, _seasonController, _buildingObjectConfig);
             _player.Start();
             _buildController.Start();
             _interactor.Start();

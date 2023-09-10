@@ -1,21 +1,18 @@
 ﻿using Assets.Game.Scripts.Builders;
-using Assets.Game.Scripts.Ui;
 using Sirenix.OdinInspector;
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Game.Scripts.BuildStates
 {
-    [CreateAssetMenu(fileName ="BuildinObjectConfig", menuName = "SO/BuildinObjectConfig")]
+    [CreateAssetMenu(fileName = "BuildinObjectConfig", menuName = "SO/BuildinObjectConfig")]
     public class BuildinObjectConfig : ScriptableObject
     {
         [SerializeField] private BuildingItemData[] _builds;
         [SerializeField] private BuildingItemData[] _plants;
 
         public BuildingItemData[] Builds => _builds;
-        public BuildingItemData[] Plants => _plants; 
+        public BuildingItemData[] Plants => _plants;
     }
 
     [Serializable]

@@ -6,6 +6,6 @@ namespace Assets.Game.Scripts.Plants
     {
         [SerializeField] private Transform[] _points;
 
-        public Transform[] Points => _points; 
+        public Transform[] Points => _points;
     }
 }

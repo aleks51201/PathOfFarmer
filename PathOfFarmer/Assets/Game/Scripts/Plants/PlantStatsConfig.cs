@@ -12,7 +12,7 @@ namespace Assets.Game.Scripts.Plants
 
 
         public PlantStage[] PlantStages => _plantStages;
-        public PointsForPlantView PointsForPlant => _pointsForPlant; 
+        public PointsForPlantView PointsForPlant => _pointsForPlant;
     }
 
 

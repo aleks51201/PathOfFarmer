@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Game.Scripts.Ui
 {
@@ -16,7 +15,7 @@ namespace Assets.Game.Scripts.Ui
         private void OnStartOpen()
         {
             gameObject.SetActive(true);
-            
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
