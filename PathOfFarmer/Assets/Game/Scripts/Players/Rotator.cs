@@ -21,8 +21,6 @@ namespace Assets.Game.Scripts.Players
 
         public void Start()
         {
-            _customInput.Enable();
-
             _customInput.Player.Look.performed += OnPerfomed;
             _customInput.Player.Look.canceled += OnCanceled;
         }

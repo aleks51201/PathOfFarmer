@@ -38,7 +38,7 @@ namespace Assets.Game.Scripts
 
             _seasonController = new SeasonController(_customInput);
             _player = new Player(_playerView, _customInput);
-            _buildController = new BuildController(_spawnHolder, _uiMediator, _customInput);
+            _buildController = new BuildController(_spawnHolder, _uiMediator, _customInput, _player.PlayerView.Camera);
             _interactor = new Interactor(_buildController, _customInput);
             _storeHouse = new StoreHouse(_storeHouseView);
             _gardenBedHolder = new GardenBedHolder(_gardenBedHolderView,_buildController, _seasonController, _storeHouse);
