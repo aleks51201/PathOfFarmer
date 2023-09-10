@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b326f0366221c547b780db81bf8c39a, type: 3}
   m_Name: BuildinObjectConfig
   m_EditorClassIdentifier: 
-  _builds: []
+  _builds:
+  - Name: "\u0417\u0430\u0431\u043E\u0440"
+    Icon: {fileID: 21300000, guid: 01e658142d12f6c439d6547449f570a6, type: 3}
+    Cost: 100
+    BuildingObjectPrefab: {fileID: 274118017269882083, guid: 98f58be32cf7ba147a9980605795b020, type: 3}
+  - Name: "\u0413\u0440\u044F\u0434\u043A\u0430"
+    Icon: {fileID: 21300000, guid: b148e2fd786df3f4fb42f63ba2b8e6ce, type: 3}
+    Cost: 150
+    BuildingObjectPrefab: {fileID: 274118017269882083, guid: 98f58be32cf7ba147a9980605795b020, type: 3}
   _plants: []

@@ -1,4 +1,5 @@
-﻿using Assets.Game.Scripts.BuildStates;
+﻿using Assets.Game.Scripts.Builders;
+using Assets.Game.Scripts.BuildStates;
 using Assets.Game.Scripts.Seasons;
 using System;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace Assets.Game.Scripts
 
         public event Action StartOpenGardenPanelEvent = delegate { };
         public event Action StartOpenInventoryPanelEvent = delegate { };
+        public event Action StartOpenBuilderPanelEvent = delegate { };
+        public event Action<BuildObjectView> BuildObjectSelectedEvent = delegate { };
 
         public void Initialize(SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
         {
@@ -52,6 +55,14 @@ namespace Assets.Game.Scripts
         {
             StartOpenGardenPanelEvent.Invoke();
         }
-    }
 
+        public void OpenBuilderPanel()
+        {
+            StartOpenBuilderPanelEvent.Invoke();
+        }
+        public void OnBuildObjectSelected(BuildObjectView prefab)
+        {
+            BuildObjectSelectedEvent.Invoke(prefab);
+        }
+    }
 }

@@ -1,4 +1,6 @@
-﻿using Assets.Game.Scripts.Ui;
+﻿using Assets.Game.Scripts.Builders;
+using Assets.Game.Scripts.Ui;
+using Sirenix.OdinInspector;
 using System;
 using TMPro;
 using UnityEngine;
@@ -20,7 +22,8 @@ namespace Assets.Game.Scripts.BuildStates
     public struct BuildingItemData
     {
         public string Name;
-        public Sprite Icon;
+        [PreviewField] public Sprite Icon;
         public int Cost;
+        public BuildObjectView BuildingObjectPrefab;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Assets.Game.Scripts.Ui;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +13,10 @@ namespace Assets.Game.Scripts.BuildStates
         [SerializeField] private Image _image;
 
         public TMP_Text Name => _name;
-        public TMP_Text Cost => _cost; 
+        public TMP_Text Cost => _cost;
         public Image Image => _image;
+
+        public event Action<BuildingInventoryCellView> ButtonClickedEvent = delegate { };
 
         public override void Initialize(UiMediator uiMediator)
         {
@@ -21,6 +24,7 @@ namespace Assets.Game.Scripts.BuildStates
 
         public override void OnClick()
         {
+            ButtonClickedEvent.Invoke(this);
         }
     }
 }

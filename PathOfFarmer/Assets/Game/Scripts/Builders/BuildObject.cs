@@ -7,26 +7,29 @@ namespace Assets.Game.Scripts.Builders
     {
         private readonly Transform _parentTransform;
         private readonly BuildObjectCollisionHolder _collisionHolder;
+        private MaterialChanger _materialChanger;
+        private bool _isCompleted;
 
-        public BuildObject(BuildObfectView buildObjectView, Transform parentTransform)
+        public BuildObject(BuildObjectView buildObjectView, Transform parentTransform)
         {
             Prefab = buildObjectView ?? throw new System.ArgumentNullException(nameof(buildObjectView));
             _parentTransform = parentTransform ?? throw new System.ArgumentNullException(nameof(parentTransform));
             _collisionHolder = new BuildObjectCollisionHolder();
         }
 
-        public BuildObfectView Prefab { get; }
-        public BuildObfectView View { get; private set; }
+        public BuildObjectView Prefab { get; }
+        public BuildObjectView View { get; private set; }
 
-        private MaterialChanger _materialChanger;
 
-        public BuildObfectView Spawn()
+        public BuildObjectView Spawn()
         {
             View = Object.Instantiate(Prefab, _parentTransform.position, Quaternion.identity, _parentTransform);
 
             _collisionHolder.Reset();
 
             _materialChanger = new MaterialChanger(View.Renderer);
+
+            _isCompleted = false;
 
             Sub();
 
@@ -49,6 +52,18 @@ namespace Assets.Game.Scripts.Builders
             ChangeLayer();
 
             ResetMaterial();
+
+            _isCompleted = true;
+        }
+
+        public void Cancel()
+        {
+            if (!_isCompleted)
+            {
+                Object.Destroy(View.gameObject);
+            }
+
+            Unsub();
         }
 
         private void Sub()

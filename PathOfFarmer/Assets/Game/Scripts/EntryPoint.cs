@@ -12,7 +12,7 @@ namespace Assets.Game.Scripts
     {
         [SerializeField] private PlayerView _playerView;
         [SerializeField] private UiMediator _uiMediator;
-        [SerializeField] private BuildObfectView _buildObjectViewPrefab;
+        [SerializeField] private BuildObjectView _buildObjectViewPrefab;
         [SerializeField] private Transform _spawnHolder;
         [SerializeField] private GardenBedView _gardenBedView;
         [SerializeField] private StoreHouseView _storeHouseView;
@@ -33,7 +33,7 @@ namespace Assets.Game.Scripts
             _seasonController = new SeasonController();
 
             _player = new Player(_playerView);
-            _buildController = new BuildController(_buildObjectViewPrefab, _spawnHolder);
+            _buildController = new BuildController(_spawnHolder, _uiMediator);
             _interactor = new Interactor(_buildController);
             _storeHouse = new StoreHouse(_storeHouseView);
             _gardenBed = new GardenBed(_gardenBedView, _seasonController, _storeHouse);

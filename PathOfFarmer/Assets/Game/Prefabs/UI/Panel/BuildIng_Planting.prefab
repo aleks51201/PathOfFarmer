@@ -181,6 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6127116938031584752}
   - component: {fileID: 1457692458625235586}
+  - component: {fileID: 5226983455197408542}
   m_Layer: 5
   m_Name: BuildIng_Planting
   m_TagString: Untagged
@@ -223,6 +224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _container: {fileID: 6968652896515826618}
   _cellPrefab: {fileID: 9220522350255061985, guid: ed46c0d314795074f87fed0d9c398020, type: 3}
+--- !u!114 &5226983455197408542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613999852849525422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8050c7807b349b444acf72618876c39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4723525052803610744
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +271,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 300}
+  m_SizeDelta: {x: 0, y: 183}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4494575184718285565
 MonoBehaviour:

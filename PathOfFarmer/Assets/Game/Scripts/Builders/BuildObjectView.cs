@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Game.Scripts.Builders
 {
     [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-    public class BuildObfectView : MonoBehaviour, IBuildObject
+    public class BuildObjectView : MonoBehaviour, IBuildObject
     {
         [SerializeField, FoldoutGroup("Components")] private Renderer _renderer;
         [SerializeField, BoxGroup("Materials")] private Material _positive;

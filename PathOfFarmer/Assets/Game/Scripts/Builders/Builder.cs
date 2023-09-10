@@ -4,12 +4,14 @@ namespace Assets.Game.Scripts.Builders
 {
     public class Builder
     {
-        private readonly BuildObject _buildObject;
+        private BuildObject _buildObject;
+        private readonly Transform _parentTransrorm;
 
-        public Builder(BuildObfectView buildObfectViewPrefab, Transform parentTransrorm)
+        public Builder(Transform parentTransrorm)
         {
-            _buildObject = new BuildObject(buildObfectViewPrefab, parentTransrorm);
+            _parentTransrorm = parentTransrorm;
         }
+
         public bool IsBuilding { get; private set; }
 
         public void Start()
@@ -39,6 +41,17 @@ namespace Assets.Game.Scripts.Builders
             Stop();
 
             _buildObject.Complete();
+        }
+
+        public void ChangeBuildObject(BuildObjectView buildObfectViewPrefab)
+        {
+            if (IsBuilding)
+            {
+                Stop();
+            }
+
+            _buildObject?.Cancel();
+            _buildObject = new BuildObject(buildObfectViewPrefab, _parentTransrorm);
         }
 
         private void Move(Vector3 position)
