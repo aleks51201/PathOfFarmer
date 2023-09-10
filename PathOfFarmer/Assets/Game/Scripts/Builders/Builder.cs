@@ -43,7 +43,7 @@ namespace Assets.Game.Scripts.Builders
             _buildObject.Complete();
         }
 
-        public void ChangeBuildObject(BuildObjectView buildObfectViewPrefab)
+        public void ChangeBuildObject(BuildObjectView ghost, BuildObjectView buildObject)
         {
             if (IsBuilding)
             {
@@ -51,7 +51,7 @@ namespace Assets.Game.Scripts.Builders
             }
 
             _buildObject?.Cancel();
-            _buildObject = new BuildObject(buildObfectViewPrefab, _parentTransrorm);
+            _buildObject = new BuildObject(ghost, buildObject, _parentTransrorm);
         }
 
         private void Move(Vector3 position)

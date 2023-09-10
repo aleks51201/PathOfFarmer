@@ -24,6 +24,7 @@ namespace Assets.Game.Scripts.BuildStates
         public string Name;
         [PreviewField] public Sprite Icon;
         public int Cost;
-        public BuildObjectView BuildingObjectPrefab;
+        public BuildObjectView GhostPrefab;
+        public BuildObjectView BuilingObjectPrefab;
     }
 }

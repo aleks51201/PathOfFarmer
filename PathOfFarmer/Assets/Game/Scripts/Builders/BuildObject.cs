@@ -9,13 +9,16 @@ namespace Assets.Game.Scripts.Builders
         private readonly BuildObjectCollisionHolder _collisionHolder;
         private MaterialChanger _materialChanger;
         private bool _isCompleted;
+        private BuildObjectView _ghostPrefab;
 
-        public BuildObject(BuildObjectView buildObjectView, Transform parentTransform)
+        public BuildObject(BuildObjectView ghostPrefab, BuildObjectView buildObjectViewPrefab, Transform parentTransform)
         {
-            Prefab = buildObjectView ?? throw new System.ArgumentNullException(nameof(buildObjectView));
+            _ghostPrefab = ghostPrefab ?? throw new System.ArgumentNullException(nameof(ghostPrefab));
+            Prefab = buildObjectViewPrefab ?? throw new System.ArgumentNullException(nameof(buildObjectViewPrefab));
             _parentTransform = parentTransform ?? throw new System.ArgumentNullException(nameof(parentTransform));
             _collisionHolder = new BuildObjectCollisionHolder();
         }
+
 
         public BuildObjectView Prefab { get; }
         public BuildObjectView View { get; private set; }
@@ -23,7 +26,7 @@ namespace Assets.Game.Scripts.Builders
 
         public BuildObjectView Spawn()
         {
-            View = Object.Instantiate(Prefab, _parentTransform.position, Quaternion.identity, _parentTransform);
+            View = Object.Instantiate(_ghostPrefab, _parentTransform.position, Quaternion.identity, _parentTransform);
 
             _collisionHolder.Reset();
 
@@ -40,12 +43,10 @@ namespace Assets.Game.Scripts.Builders
 
         public void Complete()
         {
-            if (_collisionHolder.CollisionCount != 0)
-            {
-                Object.Destroy(View.gameObject);
+            Object.Destroy(View.gameObject);
+            if (_collisionHolder.CollisionCount != 0)  return; 
 
-                return;
-            }
+            Object.Instantiate(Prefab, View.transform.position, View.transform.rotation, _parentTransform);
 
             Unsub();
 

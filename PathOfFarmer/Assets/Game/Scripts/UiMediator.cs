@@ -21,7 +21,7 @@ namespace Assets.Game.Scripts
         public event Action StartOpenInventoryPanelEvent = delegate { };
         public event Action StartOpenBuilderPanelEvent = delegate { };
         public event Action StartCloseBuilderPanelEvent = delegate { };
-        public event Action<BuildObjectView> BuildObjectSelectedEvent = delegate { };
+        public event Action<BuildObjects> BuildObjectSelectedEvent = delegate { };
 
         public void Initialize(CustomInput input,SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
         {
@@ -65,9 +65,9 @@ namespace Assets.Game.Scripts
             StartCloseBuilderPanelEvent.Invoke();
         }
 
-        public void OnBuildObjectSelected(BuildObjectView prefab)
+        public void OnBuildObjectSelected(BuildObjects prefabs)
         {
-            BuildObjectSelectedEvent.Invoke(prefab);
+            BuildObjectSelectedEvent.Invoke(prefabs);
         }
     }
 }

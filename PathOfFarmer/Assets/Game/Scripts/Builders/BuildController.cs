@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Game.Scripts.BuildStates;
+using System;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -46,7 +47,7 @@ namespace Assets.Game.Scripts.Builders
             _customInput.Player.Build.performed -= OnBuildClick;
         }
 
-        private void OnSelected(BuildObjectView prefab)
+        private void OnSelected(BuildObjects prefabs)
         {
             _uiMediator.CloseBuilderPanel();
             _customInput.Player.Enable();
@@ -54,7 +55,7 @@ namespace Assets.Game.Scripts.Builders
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            _builder.ChangeBuildObject(prefab);
+            _builder.ChangeBuildObject(prefabs.GhostPrefab,prefabs.BuilingObjectPrefab);
             _builder.Start();
 
             _customInput.Player.Enable();

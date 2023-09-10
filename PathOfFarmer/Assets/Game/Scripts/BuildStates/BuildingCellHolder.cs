@@ -12,11 +12,11 @@ namespace Assets.Game.Scripts.BuildStates
 
         private BuildinObjectConfig _buildConfig;
         private UiMediator _uiMediator;
-        private Dictionary<BuildingInventoryCellView, BuildObjectView> _buildObjectMap = new();
+        private Dictionary<BuildingInventoryCellView, BuildObjects> _buildObjectMap = new();
 
         public Transform Container => _container;
 
-        public event Action<BuildObjectView> BuildObjectSelectedEvent = delegate { };
+        public event Action<BuildObjects> BuildObjectSelectedEvent = delegate { };
 
         public void Initialize(UiMediator uiMediator)
         {
@@ -35,7 +35,7 @@ namespace Assets.Game.Scripts.BuildStates
                 cell.Cost.text = $"{item.Cost}";
                 cell.Image.sprite = item.Icon;
 
-                _buildObjectMap.Add(cell, item.BuildingObjectPrefab);
+                _buildObjectMap.Add(cell,new BuildObjects( item.GhostPrefab,item.BuilingObjectPrefab));
 
                 cell.ButtonClickedEvent += OnSelected;
             }
@@ -45,6 +45,18 @@ namespace Assets.Game.Scripts.BuildStates
         {
             _uiMediator.OnBuildObjectSelected(_buildObjectMap[cell]);
             BuildObjectSelectedEvent.Invoke(_buildObjectMap[cell]);
+        }
+    }
+
+    public struct BuildObjects
+    {
+        public BuildObjectView GhostPrefab;
+        public BuildObjectView BuilingObjectPrefab;
+
+        public BuildObjects(BuildObjectView ghostPrefab,BuildObjectView builingObjectPrefab)
+        {
+            GhostPrefab =ghostPrefab ;
+            BuilingObjectPrefab =builingObjectPrefab;
         }
     }
 }
