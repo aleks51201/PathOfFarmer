@@ -26,7 +26,7 @@ namespace Assets.Game.Scripts.Builders
 
         public BuildObjectView Spawn()
         {
-            View = Object.Instantiate(_ghostPrefab, _parentTransform.position, Quaternion.identity, _parentTransform);
+            View = Object.Instantiate(_ghostPrefab, _parentTransform.position, _ghostPrefab.transform.rotation, _parentTransform);
 
             _collisionHolder.Reset();
 
