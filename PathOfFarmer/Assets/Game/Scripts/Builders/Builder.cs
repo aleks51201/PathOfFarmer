@@ -43,7 +43,7 @@ namespace Assets.Game.Scripts.Builders
             _buildObject.Complete();
         }
 
-        public void ChangeBuildObject(BuildObjectView ghost, BuildObjectView buildObject)
+        public void ChangeBuildObject(BuildObjectView ghost, GameObject buildObject)
         {
             if (IsBuilding)
             {

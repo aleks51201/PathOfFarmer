@@ -11,7 +11,7 @@ namespace Assets.Game.Scripts.Builders
         private bool _isCompleted;
         private BuildObjectView _ghostPrefab;
 
-        public BuildObject(BuildObjectView ghostPrefab, BuildObjectView buildObjectViewPrefab, Transform parentTransform)
+        public BuildObject(BuildObjectView ghostPrefab,GameObject buildObjectViewPrefab, Transform parentTransform)
         {
             _ghostPrefab = ghostPrefab ?? throw new System.ArgumentNullException(nameof(ghostPrefab));
             Prefab = buildObjectViewPrefab ?? throw new System.ArgumentNullException(nameof(buildObjectViewPrefab));
@@ -20,7 +20,7 @@ namespace Assets.Game.Scripts.Builders
         }
 
 
-        public BuildObjectView Prefab { get; }
+        public GameObject Prefab { get; }
         public BuildObjectView View { get; private set; }
 
 

@@ -51,9 +51,9 @@ namespace Assets.Game.Scripts.BuildStates
     public struct BuildObjects
     {
         public BuildObjectView GhostPrefab;
-        public BuildObjectView BuilingObjectPrefab;
+        public GameObject BuilingObjectPrefab;
 
-        public BuildObjects(BuildObjectView ghostPrefab, BuildObjectView builingObjectPrefab)
+        public BuildObjects(BuildObjectView ghostPrefab, GameObject builingObjectPrefab)
         {
             GhostPrefab = ghostPrefab;
             BuilingObjectPrefab = builingObjectPrefab;
