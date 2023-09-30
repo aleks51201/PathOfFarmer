@@ -13,11 +13,10 @@ namespace Assets.Game.Scripts.Builders
         private readonly CinemachineVirtualCamera _camera;
         private readonly UiMediator _uiMediator;
 
-        public BuildController(Transform parentTransform, UiMediator uiMediator, CustomInput input, CinemachineVirtualCamera camera)
+        public BuildController(Transform parentTransform, UiMediator uiMediator, CustomInput input)
         {
             _uiMediator = uiMediator ?? throw new ArgumentNullException(nameof(uiMediator));
             _customInput = input ?? throw new ArgumentNullException(nameof(input));
-            _camera = camera ?? throw new ArgumentNullException(nameof(camera));
             _builder = new Builder(parentTransform);
         }
 
@@ -45,8 +44,6 @@ namespace Assets.Game.Scripts.Builders
         private void OnBuildClick(CallbackContext context)
         {
             _uiMediator.OpenBuilderPanel();
-            _customInput.Player.Disable();
-            _camera.enabled = false;
 
             _uiMediator.BuildObjectSelectedEvent += OnSelected;
             _customInput.Player.Build.performed -= OnBuildClick;
@@ -55,11 +52,6 @@ namespace Assets.Game.Scripts.Builders
         private void OnSelected(BuildObjects prefabs)
         {
             _uiMediator.CloseBuilderPanel();
-            _customInput.Player.Enable();
-            _camera.enabled = true;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
 
             _builder.ChangeBuildObject(prefabs.GhostPrefab, prefabs.BuilingObjectPrefab);
             _builder.Start();

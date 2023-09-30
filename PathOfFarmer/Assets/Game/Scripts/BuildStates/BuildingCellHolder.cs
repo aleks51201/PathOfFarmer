@@ -1,32 +1,18 @@
 ﻿using Assets.Game.Scripts.Builders;
+using Assets.Game.Scripts.Plants;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Game.Scripts.BuildStates
 {
-    public class BuildingCellHolder : MonoBehaviour, IUi
+    public class BuildingCellHolder :CellHolderBase 
     {
-        [SerializeField] private Transform _container;
-        [SerializeField] private BuildingInventoryCellView _cellPrefab;
-
-        private BuildinObjectConfig _buildConfig;
-        private UiMediator _uiMediator;
         private Dictionary<BuildingInventoryCellView, BuildObjects> _buildObjectMap = new();
-
-        public Transform Container => _container;
 
         public event Action<BuildObjects> BuildObjectSelectedEvent = delegate { };
 
-        public void Initialize(UiMediator uiMediator)
-        {
-            _buildConfig = uiMediator.BuildinObjectConfig;
-            _uiMediator = uiMediator;
-
-            CreateCells();
-        }
-
-        private void CreateCells()
+        protected override void CreateCells()
         {
             foreach (var item in _buildConfig.Builds)
             {
@@ -41,7 +27,7 @@ namespace Assets.Game.Scripts.BuildStates
             }
         }
 
-        private void OnSelected(BuildingInventoryCellView cell)
+        protected override void OnSelected(BuildingInventoryCellView cell)
         {
             _uiMediator.OnBuildObjectSelected(_buildObjectMap[cell]);
             BuildObjectSelectedEvent.Invoke(_buildObjectMap[cell]);

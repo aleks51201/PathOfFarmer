@@ -1,5 +1,7 @@
 ﻿using Assets.Game.Scripts.BuildStates;
+using Assets.Game.Scripts.Plants;
 using Assets.Game.Scripts.Seasons;
+using Cinemachine;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +16,8 @@ namespace Assets.Game.Scripts
 
         public SeasonController SeasonController { get; private set; }
         public BuildinObjectConfig BuildinObjectConfig { get; private set; }
+        public CinemachineVirtualCamera Camera { get; private set; }
+
         public CustomInput CustomInput => _customInput;
 
         public event Action StartOpenGardenPanelEvent = delegate { };
@@ -21,11 +25,14 @@ namespace Assets.Game.Scripts
         public event Action StartOpenBuilderPanelEvent = delegate { };
         public event Action StartCloseBuilderPanelEvent = delegate { };
         public event Action<BuildObjects> BuildObjectSelectedEvent = delegate { };
+        public event Action<PlantStatsConfig> PlantsSelectedEvent = delegate { };
 
-        public void Initialize(CustomInput input, SeasonController seasonController, BuildinObjectConfig buildingObjectConfig)
+        public void Initialize(CustomInput input, SeasonController seasonController, BuildinObjectConfig buildingObjectConfig,
+            CinemachineVirtualCamera camera)
         {
             SeasonController = seasonController ?? throw new ArgumentNullException(nameof(seasonController));
             BuildinObjectConfig = buildingObjectConfig ?? throw new ArgumentNullException(nameof(buildingObjectConfig));
+            Camera = camera;
 
             _customInput = input;
 
@@ -67,6 +74,11 @@ namespace Assets.Game.Scripts
         public void OnBuildObjectSelected(BuildObjects prefabs)
         {
             BuildObjectSelectedEvent.Invoke(prefabs);
+        }
+
+        public void OnPlantsSelected(PlantStatsConfig plantConfig)
+        {
+            PlantsSelectedEvent.Invoke(plantConfig);
         }
     }
 }

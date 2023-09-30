@@ -1,4 +1,5 @@
 ﻿using Assets.Game.Scripts.Builders;
+using Assets.Game.Scripts.Plants;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -9,10 +10,10 @@ namespace Assets.Game.Scripts.BuildStates
     public class BuildinObjectConfig : ScriptableObject
     {
         [SerializeField] private BuildingItemData[] _builds;
-        [SerializeField] private BuildingItemData[] _plants;
+        [SerializeField] private PlantsItemData[] _plants;
 
         public BuildingItemData[] Builds => _builds;
-        public BuildingItemData[] Plants => _plants;
+        public PlantsItemData[] Plants => _plants;
     }
 
     [Serializable]
@@ -23,5 +24,14 @@ namespace Assets.Game.Scripts.BuildStates
         public int Cost;
         public BuildObjectView GhostPrefab;
         public GameObject BuilingObjectPrefab;
+    }
+
+    [Serializable]
+    public struct PlantsItemData
+    {
+        public string Name;
+        [PreviewField] public Sprite Icon;
+        public int Cost;
+        public PlantStatsConfig PlantStatsConfig;
     }
 }
